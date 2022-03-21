@@ -44,7 +44,7 @@ public class SubCategoryDAO implements SubCategoryRepository{
     }
 
     public SubCategory getSubCategoryByCode(String code) {
-        String sql = "from category where code = '" + code + "'";
+        String sql = "from subcategory where sub_category_code = '" + code + "'";
         List<SubCategory> cList = getSession().createQuery(sql).list();
         return cList.get(0);
 

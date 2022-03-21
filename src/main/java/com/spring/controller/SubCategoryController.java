@@ -1,6 +1,8 @@
 package com.spring.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,7 +29,7 @@ public class SubCategoryController implements ISubCategoryController{
 	CategoryDAO catdao;
 	
 	@Autowired
-	SubCategoryService subcatser;
+	SubCategoryService subCatService;
 	
 	@Override
 	@RequestMapping(value = "/create")
@@ -39,16 +41,20 @@ public class SubCategoryController implements ISubCategoryController{
 	@Override
 	@RequestMapping(value = "/save")
 	public ModelAndView save(HttpServletRequest request) {
-		SubCategory sc = subcatser.save(request);
+		SubCategory sc = subCatService.save(request);
 		return new ModelAndView("subcategory/create", "sc", sc);
 	}
 
 	@Override
 	@RequestMapping(value = "/edit/{code}", method = RequestMethod.GET)
-	public ModelAndView edit(@PathVariable String id) {
-		String cCode = id;
-		Category c;
-		return null;
+	public ModelAndView edit(@PathVariable String code) {
+		String cCode = code;
+		SubCategory sc = subCatService.getSubCategoryByCode(cCode);
+		List<Category> categorys = catdao.getAll();
+		Map data = new HashMap();
+		data.put("subCategory", sc);
+		data.put("category", categorys);
+		return new ModelAndView("/subcategory/edit", "data", data);
 	}
 
 	@Override
@@ -66,7 +72,7 @@ public class SubCategoryController implements ISubCategoryController{
 	@Override
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public ModelAndView getAll() {
-		List<SubCategory> subCategory = subcatser.getAll();
+		List<SubCategory> subCategory = subCatService.getAll();
 		return new ModelAndView("subcategory/view", "subCategory", subCategory);
 	}
 

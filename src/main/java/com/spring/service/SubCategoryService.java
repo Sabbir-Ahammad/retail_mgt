@@ -26,6 +26,7 @@ public class SubCategoryService implements ISubCategoryService{
 		String stringPart2 = stringPart[1];
 		SubCategory sc = new SubCategory();
 		sc.setCategoryCode(stringPart1);
+		sc.setCategoryName(stringPart2);
 		sc.setSubCategoryCode(request.getParameter("subcode"));
 		sc.setSubCategoryName(request.getParameter("subname"));
 		return subcatdao.save(sc);

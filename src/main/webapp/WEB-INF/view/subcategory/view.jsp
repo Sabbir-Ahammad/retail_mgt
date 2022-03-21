@@ -6,6 +6,7 @@
          <thead>
             <tr>
                 <th>Category code</th>
+                <th>Category name</th>
                 <th>Sub-category code</th>
                 <th>Sub-category name</th>
                 <th>Action</th>
@@ -15,6 +16,7 @@
             <c:forEach items="${subCategory}" var="sc">
                 <tr>
                     <td>${sc.categoryCode}</td>
+                    <td>${sc.categoryName}</td>
                     <td>${sc.subCategoryCode}</td>
                     <td>${sc.subCategoryName}</td>
                     <td>
