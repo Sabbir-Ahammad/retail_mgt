@@ -11,9 +11,9 @@
 			    <div class="form-group col-md-6">
 			    	<label>Select Category</label> 
 			    	<select class="form-control" id="categorycode" name="categorycode">
-			    		<c:forEach items="${data.category}" var="c">
-			    			<option>${c.code}<span>-</span>${c.name}</option>
-			    		</c:forEach>
+			    		 <c:forEach items="${data.category}" var="c">
+			    			<option value="${c.code}">${c.code}<span>-</span>${c.name}</option>
+			    		</c:forEach> 
 			    	</select>
 			  	</div>
 		  </div>
@@ -36,6 +36,7 @@
 </div>
 
 <jsp:include page="/WEB-INF/view/common/footer.jsp" />
-<!-- <script>
-$("#categorycode").val("data.subCategory.categoryCode<span>-</span>data.subCategory.categoryName");
-</script> -->
+ <script>
+var catCode =  "${data.subCategory.categoryCode}";
+$("#categorycode option[value='"+catCode+"']").attr("selected", true);
+</script>

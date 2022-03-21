@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.spring.controller.impl.ISubCategoryController;
 import com.spring.dao.CategoryDAO;
 import com.spring.dao.SubCategoryDAO;
@@ -54,6 +55,7 @@ public class SubCategoryController implements ISubCategoryController{
 		Map data = new HashMap();
 		data.put("subCategory", sc);
 		data.put("category", categorys);
+		//Gson g = new Gson();
 		return new ModelAndView("/subcategory/edit", "data", data);
 	}
 
