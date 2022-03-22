@@ -2,12 +2,15 @@ package com.spring.controller;
 
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -67,13 +70,21 @@ public class SubCategoryController implements ISubCategoryController{
 
 	@Override
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest request) {
+	public ModelAndView update(HttpServletRequest request/* , @ModelAttribute (SubCategory subcat */) {
 		SubCategory sc = subCatService.update(request);
 		List<SubCategory> subCategory = subCatService.getAll();
 		
 		/*
-		 * Enumeration<String> parameterNames = request.getParameterNames(); while
-		 * (parameterNames.hasMoreElements()) {
+		 * Map<String, String[]> map = request.getParameterMap(); Set<String> key =
+		 * map.keySet(); for (int i = 0; i < map.size(); i++) { for (String k : key) {
+		 * System.out.println("... " + k + "   " + request.getParameter(k)); }
+		 * 
+		 * }
+		 */
+		
+		/*
+		 * Enumeration<String> parameterNames = request.getParameterNames();
+		 * while(parameterNames.hasMoreElements()) {
 		 * System.out.println(parameterNames.nextElement()); }
 		 */
 		
