@@ -6,7 +6,7 @@
 	<div class="col-md-3"></div>
 	<div class="col-md-9" style="margin-top: 10px">
 		<div class="text-center"><h4>Edit Sub-category</h4></div>
-		<form action="/category/update" method="POST">
+		<form action="/subcategory/update" method="POST">
 		  <div class="form-row">
 			    <div class="form-group col-md-6">
 			    	<label>Select Category</label> 

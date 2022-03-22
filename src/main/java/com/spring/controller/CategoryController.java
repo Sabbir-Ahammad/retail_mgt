@@ -50,7 +50,8 @@ public class CategoryController implements ICategoryController{
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public ModelAndView update(HttpServletRequest request) {
         Category c = categoryService.update(request);
-        return new ModelAndView("category/view");
+        List<Category> categories = categoryService.getAll();
+        return new ModelAndView("category/view", "categories", categories);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)

@@ -1,5 +1,6 @@
 package com.spring.controller;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,11 @@ public class SubCategoryController implements ISubCategoryController{
 		String cCode = code;
 		SubCategory sc = subCatService.getSubCategoryByCode(cCode);
 		List<Category> categorys = catdao.getAll();
+		/*
+		 * String catName = ""; for (int i = 0; i < categorys.size(); i++) { if
+		 * (sc.getCategoryCode().equals(categorys.get(i).getCode())) { catName =
+		 * categorys.get(i).getName(); } } System.out.println("Category Name "+catName);
+		 */
 		Map data = new HashMap();
 		data.put("subCategory", sc);
 		data.put("category", categorys);
@@ -60,15 +66,28 @@ public class SubCategoryController implements ISubCategoryController{
 	}
 
 	@Override
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public ModelAndView update(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		SubCategory sc = subCatService.update(request);
+		List<SubCategory> subCategory = subCatService.getAll();
+		
+		/*
+		 * Enumeration<String> parameterNames = request.getParameterNames(); while
+		 * (parameterNames.hasMoreElements()) {
+		 * System.out.println(parameterNames.nextElement()); }
+		 */
+		
+		
+		return new ModelAndView("subcategory/view", "subcategory", subCategory);
 	}
 
 	@Override
-	public ModelAndView delete(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView delete(@PathVariable String id) {
+		String subCode = id;
+		boolean status = subCatService.delete(subCode);
+		List<SubCategory> subCategory = subCatService.getAll();
+		return new ModelAndView("subcategory/view", "subcategory", subCategory);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class SubCategory {
 	private String subCategoryCode;
 	@Column(name = "subCategoryName")
 	private String subCategoryName;
-	@Column(name = "categoryName")
+	
 	private String categoryName;
 	
 	public String getCategoryName() {

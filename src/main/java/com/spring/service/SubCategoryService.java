@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.dao.CategoryDAO;
 import com.spring.dao.SubCategoryDAO;
 import com.spring.model.Category;
 import com.spring.model.SubCategory;
@@ -14,6 +15,9 @@ import com.spring.service.impl.ISubCategoryService;
 
 @Service(value = "subCategoryService")
 public class SubCategoryService implements ISubCategoryService{
+	
+	@Autowired
+	CategoryDAO catdao;
 
 	@Autowired
 	SubCategoryDAO subcatdao;
@@ -26,9 +30,7 @@ public class SubCategoryService implements ISubCategoryService{
 		String stringPart2 = stringPart[1];
 		SubCategory sc = new SubCategory();
 		sc.setCategoryCode(stringPart1);
-		sc.setCategoryName(stringPart2);
 		sc.setSubCategoryCode(request.getParameter("subcode"));
-		sc.setSubCategoryName(request.getParameter("subname"));
 		return subcatdao.save(sc);
 	}
 	
@@ -44,19 +46,37 @@ public class SubCategoryService implements ISubCategoryService{
 
 	@Override
 	public SubCategory update(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		SubCategory sc = new SubCategory();
+		sc.setCategoryCode(request.getParameter("categorycode"));
+		sc.setSubCategoryCode(request.getParameter("scatcode"));
+		sc.setSubCategoryName(request.getParameter("scatname"));
+		/*
+		 * System.out.println(sc.getCategoryCode() + "" + sc.getSubCategoryCode()+ ""
+		 * +sc.getSubCategoryName());
+		 */
+		return subcatdao.update(sc);
 	}
 
 	@Override
 	public List<SubCategory> getAll() {
-		return subcatdao.getAll();
+		List<SubCategory> subCategory = subcatdao.getAll();
+		List<Category> categorys = catdao.getAll();
+		/* Get Category name from category through category code */
+		 for (int i = 0; i < subCategory.size(); i++) { 
+			 for (int j = 0; j < categorys.size(); j++) {
+				 if(categorys.get(j).getCode().equals(subCategory.get(i).getCategoryCode())) {  
+					 subCategory.get(i).setCategoryName(categorys.get(j).getName());
+				 } 
+			}
+		} 
+		return subCategory;
 	}
 
 	@Override
 	public boolean delete(String id) {
-		// TODO Auto-generated method stub
-		return false;
+		SubCategory sc = new SubCategory();
+		sc = subcatdao.delete(sc);
+		return true;
 	}
 
 }

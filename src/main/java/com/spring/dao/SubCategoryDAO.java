@@ -20,8 +20,8 @@ public class SubCategoryDAO implements SubCategoryRepository{
 
 	@Autowired
     private EntityManager entityManager;
-	
-	private Session getSession() {
+    
+    private Session getSession() {
         return entityManager.unwrap(Session.class);
     }
 
@@ -36,10 +36,6 @@ public class SubCategoryDAO implements SubCategoryRepository{
     public List<SubCategory> getAll(){
     	String sql = "from subcategory";
         List<SubCategory> subCategorys = getSession().createQuery(sql).list();
-		/*
-		 * for (int i = 0; i < categorys.size(); i++) {
-		 * System.out.println(categorys.get(i).getName()); }
-		 */
         return subCategorys;
     }
 
@@ -51,20 +47,17 @@ public class SubCategoryDAO implements SubCategoryRepository{
     }
 
     public SubCategory update(SubCategory c) {
-		/*
-		 * String hql =
-		 * "update subcategory set name = '"+c.getSubCategoryCode()+"', description = '"
-		 * +c.getSubCategoryName()+"'  where code = '"+c.getSubCategoryCode()+"'"; Query
-		 * q = getSession().createQuery(hql); q.executeUpdate();
-		 */
-    	getSession().update(c);
+		
+		 String hql = "update subcategory set sub_category_name = '"+c.getSubCategoryName()+"', category_code = '"+c.getCategoryCode()+"' where sub_category_code = '"+c.getSubCategoryCode()+"'"; 
+		 Query q = getSession().createQuery(hql); q.executeUpdate();
+		/* getSession().update(c); */
         getSession().flush();
         return c;
     }
 
 
-    public Category delete(Category c) {
-    	String sql = "delete category where code = '"+c.getCode()+"'";
+    public SubCategory delete(SubCategory c) {
+    	String sql = "delete subcategory where sub_category_code = '"+c.getSubCategoryCode()+"'";
         int delete = getSession().createQuery(sql).executeUpdate();
         return c;
     }

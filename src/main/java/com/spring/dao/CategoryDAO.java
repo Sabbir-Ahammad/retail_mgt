@@ -1,6 +1,5 @@
 package com.spring.dao;
 
-import java.io.Console;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.model.Category;
-import com.spring.model.Product;
 
 @Repository(value = "categoryDAO")
 @Transactional
