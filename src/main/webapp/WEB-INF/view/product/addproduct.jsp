@@ -1,4 +1,6 @@
 <jsp:include page="/WEB-INF/view/common/header.jsp" />
+<jsp:include page="/WEB-INF/view/product/common.jsp" />
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <p id="myP">Hello</p>
 <form action="/product/save" method="POST">
 	Name<input type="text" name="name" /><br /> Quantity<input

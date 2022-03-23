@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.spring.controller.impl.IProductController;
+import com.spring.dao.CategoryDAO;
+import com.spring.model.Category;
 import com.spring.model.Product;
 import com.spring.service.ProductService;
 
@@ -21,13 +23,16 @@ import com.spring.service.ProductService;
 @RequestMapping(value = "product")
 public class ProductController{
 	
+	@Autowired
+	CategoryDAO catdao;
     
     @Autowired
     ProductService productService;
     
     @RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
-		return new ModelAndView("product/create");
+    	List<Category> categorys = catdao.getAll();
+		return new ModelAndView("product/create", "categorys", categorys);
 	}
 
     
