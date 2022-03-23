@@ -89,7 +89,7 @@ public class SubCategoryController implements ISubCategoryController{
 		 */
 		
 		
-		return new ModelAndView("subcategory/view", "subcategory", subCategory);
+		return new ModelAndView("subcategory/view", "subCategory", subCategory);
 	}
 
 	@Override

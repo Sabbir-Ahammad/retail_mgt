@@ -14,14 +14,14 @@ import com.spring.model.SubCategory;
 import com.spring.service.impl.ISubCategoryService;
 
 @Service(value = "subCategoryService")
-public class SubCategoryService implements ISubCategoryService{
-	
+public class SubCategoryService implements ISubCategoryService {
+
 	@Autowired
 	CategoryDAO catdao;
 
 	@Autowired
 	SubCategoryDAO subcatdao;
-	
+
 	@Override
 	public SubCategory save(HttpServletRequest request) {
 		String stringPartToDevide = request.getParameter("categorycode");
@@ -33,7 +33,7 @@ public class SubCategoryService implements ISubCategoryService{
 		sc.setSubCategoryCode(request.getParameter("subcode"));
 		return subcatdao.save(sc);
 	}
-	
+
 	public SubCategory getSubCategoryByCode(String code) {
 		return subcatdao.getSubCategoryByCode(code);
 	}
@@ -62,13 +62,15 @@ public class SubCategoryService implements ISubCategoryService{
 		List<SubCategory> subCategory = subcatdao.getAll();
 		List<Category> categorys = catdao.getAll();
 		/* Get Category name from category through category code */
-		 for (int i = 0; i < subCategory.size(); i++) { 
-			 for (int j = 0; j < categorys.size(); j++) {
-				 if(categorys.get(j).getCode().equals(subCategory.get(i).getCategoryCode())) {  
-					 subCategory.get(i).setCategoryName(categorys.get(j).getName());
-				 } 
+
+		for (int i = 0; i < subCategory.size(); i++) {
+			for (int j = 0; j < categorys.size(); j++) {
+				if (categorys.get(j).getCode().equals(subCategory.get(i).getCategoryCode())) {
+					subCategory.get(i).setCategoryName(categorys.get(j).getName());
+				}
 			}
-		} 
+		}
+
 		return subCategory;
 	}
 

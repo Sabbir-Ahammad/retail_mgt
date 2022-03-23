@@ -16,49 +16,70 @@ import com.spring.model.SubCategory;
 
 @Repository(value = "subCategoryDAO")
 @Transactional
-public class SubCategoryDAO implements SubCategoryRepository{
+public class SubCategoryDAO implements SubCategoryRepository {
 
 	@Autowired
-    private EntityManager entityManager;
-    
-    private Session getSession() {
-        return entityManager.unwrap(Session.class);
-    }
+	private EntityManager entityManager;
 
+	private Session getSession() {
+		return entityManager.unwrap(Session.class);
+	}
 
-    public SubCategory save(SubCategory c){
-    	getSession().save(c);
-    	getSession().flush();
-        return c;
-    }
-    
+	public SubCategory save(SubCategory c) {
+		getSession().save(c);
+		getSession().flush();
+		return c;
+	}
 
-    public List<SubCategory> getAll(){
-    	String sql = "from subcategory";
-        List<SubCategory> subCategorys = getSession().createQuery(sql).list();
-        return subCategorys;
-    }
+	/*
+	 * public List<SubCategory> getAll() { String sql =
+	 * "SELECT subcategory.sub_category_code, subcategory.sub_category_name, subcategory.category_code, category.name "
+	 * +
+	 * "FROM subcategory RIGHT JOIN category WITH subcategory.category_code=category.code"
+	 * ;
+	 * 
+	 * String sql =
+	 * "SELECT subcategory.sub_category_code, subcategory.sub_category_name, subcategory.category_code, category.name\r\n"
+	 * +
+	 * "FROM subcategory RIGHT JOIN category ON subcategory.category_code=category.code"
+	 * ;
+	 * 
+	 * List<SubCategory> subCategorys = getSession().createQuery(sql).list();
+	 * List<SubCategory> subCategorys = getSession().createSQLQuery(sql).list(); for
+	 * (int i = 0; i < subCategorys.size(); i++) {
+	 * System.out.println(subCategorys.get(i).getSubCategoryCode()); } return
+	 * subCategorys; }
+	 */
 
-    public SubCategory getSubCategoryByCode(String code) {
-        String sql = "from subcategory where sub_category_code = '" + code + "'";
-        List<SubCategory> cList = getSession().createQuery(sql).list();
-        return cList.get(0);
+	
+	public List<SubCategory> getAll() {
+		String sql = "from subcategory";
+		List<SubCategory> subCategorys = getSession().createQuery(sql).list();
+		return subCategorys;
+	}
+	 
 
-    }
+	public SubCategory getSubCategoryByCode(String code) {
+		String sql = "from subcategory where sub_category_code = '" + code + "'";
+		List<SubCategory> cList = getSession().createQuery(sql).list();
+		return cList.get(0);
 
-    public SubCategory update(SubCategory c) {
-		
-		 String hql = "update subcategory set sub_category_name = '"+c.getSubCategoryName()+"', category_code = '"+c.getCategoryCode()+"' where sub_category_code = '"+c.getSubCategoryCode()+"'"; 
-		 Query q = getSession().createQuery(hql); q.executeUpdate();
+	}
+
+	public SubCategory update(SubCategory c) {
+
+		String hql = "update subcategory set sub_category_name = '" + c.getSubCategoryName() + "', category_code = '"
+				+ c.getCategoryCode() + "' where sub_category_code = '" + c.getSubCategoryCode() + "'";
+		Query q = getSession().createQuery(hql);
+		q.executeUpdate();
 		/* getSession().update(c); */
-        getSession().flush();
-        return c;
-    }
+		getSession().flush();
+		return c;
+	}
 
-
-    public SubCategory delete(SubCategory c) {
-    	String sql = "delete subcategory where sub_category_code = '"+c.getSubCategoryCode()+"'";
-        int delete = getSession().createQuery(sql).executeUpdate();
-        return c;
-    }
+	public SubCategory delete(SubCategory c) {
+		String sql = "delete subcategory where sub_category_code = '" + c.getSubCategoryCode() + "'";
+		int delete = getSession().createQuery(sql).executeUpdate();
+		return c;
+	}
 }
