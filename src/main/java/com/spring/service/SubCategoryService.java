@@ -21,7 +21,7 @@ public class SubCategoryService implements ISubCategoryService {
 
 	@Autowired
 	SubCategoryDAO subcatdao;
-	
+
 	@Override
 	public SubCategory save(HttpServletRequest request) {
 		String stringPartToDevide = request.getParameter("categorycode");

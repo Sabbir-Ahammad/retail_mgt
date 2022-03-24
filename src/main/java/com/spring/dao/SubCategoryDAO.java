@@ -1,5 +1,6 @@
 package com.spring.dao;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,6 +8,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
+import org.hibernate.query.NativeQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -52,12 +54,16 @@ public class SubCategoryDAO implements SubCategoryRepository {
 	 */
 
 	public List<SubCategory> getAll() {
-		String sql = "from subcategory";
-		List<SubCategory> subCategorys = getSession().createQuery(sql).list();
-//		String sql = "select * from subcategory;";
-//	Query q = getSession().createNativeQuery(sql);
-//	List<SubCategory> subCategorys = q.getResultList();
-		return subCategorys;
+		//String sql = "from subcategory";
+		//List<SubCategory> subCategorys = getSession().createQuery(sql).list();
+		String sql = "select * from subcategory";
+	    NativeQuery<SubCategory> q = getSession().createNativeQuery(sql, SubCategory.class);
+	    List<SubCategory> scat = q.getResultList();
+//		  for (int i = 0; i < scat.size(); i++) {
+//		  System.out.println(scat.get(i).getCategoryName() + " ..............."); 
+//		  }
+//		
+		return scat;
 	}
 
 	public SubCategory getSubCategoryByCode(String code) {
@@ -82,5 +88,11 @@ public class SubCategoryDAO implements SubCategoryRepository {
 		String sql = "delete subcategory where sub_category_code = '" + c.getSubCategoryCode() + "'";
 		int delete = getSession().createQuery(sql).executeUpdate();
 		return c;
+	}
+	
+	public List<SubCategory> getAll(String catCode) {
+		String sql = "from subcategory where category_code = '" + catCode + "'";
+		List<SubCategory> cList = getSession().createQuery(sql).list();
+		return cList;
 	}
 }

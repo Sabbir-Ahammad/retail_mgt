@@ -1,32 +1,51 @@
 package com.spring.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.multipart.Part;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.spring.common.FileSaveUtil;
 import com.spring.controller.impl.IProductController;
 import com.spring.dao.CategoryDAO;
+import com.spring.dao.SubCategoryDAO;
 import com.spring.model.Category;
 import com.spring.model.Product;
+import com.spring.model.SubCategory;
 import com.spring.service.ProductService;
 
 @RestController
 @RequestMapping(value = "product")
+@MultipartConfig(
+		  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+		  maxFileSize = 1024 * 1024 * 10,      // 10 MB
+		  maxRequestSize = 1024 * 1024 * 100   // 100 MB
+		)
 public class ProductController {
 
 	@Autowired
 	CategoryDAO catdao;
 
+	@Autowired
+	SubCategoryDAO subCategoryDAO;
+	
 	@Autowired
 	ProductService productService;
 
@@ -36,18 +55,27 @@ public class ProductController {
 		return new ModelAndView("product/create", "categorys", categorys);
 	}
 	
-	@RequestMapping(value = "/searchSubcat", method = RequestMethod.POST)
-	public ModelAndView getValue(HttpServletRequest request) {
-		System.out.println(request.getParameter("categorycode"));
-		return new ModelAndView("product/create");
+	@RequestMapping(value = "/searchSubcat/{category}", method = RequestMethod.POST)
+	public List<SubCategory> getValue(HttpServletRequest request, @PathVariable("category") String category) {
+		List<SubCategory> subcat = productService.getSubCatValue(category);
+		return subCategoryDAO.getAll(category);
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView save(HttpServletRequest request) {
+	public ModelAndView save(HttpServletRequest request, @RequestParam("image") MultipartFile file) {
 //        Product p = productService.save(request);
+		String image = file.getOriginalFilename().toString();
+		try {
+			
+			File saveFile = new File(FileSaveUtil.fileLocation(), image);
+			InputStream imageFile = file.getInputStream();
+			Files.copy(imageFile, saveFile.toPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("file name : " + image);
 		
-		System.out.println(request.getParameter("categorycode"));
-
 //		Map<String, String[]> map = request.getParameterMap();
 //		Set<String> key = map.keySet();
 //		for (int i = 0; i < map.size(); i++) {

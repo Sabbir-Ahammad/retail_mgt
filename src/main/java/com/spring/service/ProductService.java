@@ -18,12 +18,17 @@ public class ProductService{
 
 	@Autowired
     ProductDAO productDAO;
+	@Autowired
+	SubCategoryService subCat;
 	
-	public SubCategory getValue(HttpServletRequest request) {
-		String stringPartToDevide = request.getParameter("categorycode");
-		String[] stringPart = stringPartToDevide.split("-");
-		String stringPart1 = stringPart[0];
-		String stringPart2 = stringPart[1];
+	public List<SubCategory> getSubCatValue(String catCode) {
+		/*
+		 * String stringPartToDevide = request.getParameter("categorycode"); String[]
+		 * stringPart = stringPartToDevide.split("-"); String stringPart1 =
+		 * stringPart[0]; String stringPart2 = stringPart[1];
+		 * System.out.println(stringPart1);
+		 */
+	
 		return null;
 	}
 
