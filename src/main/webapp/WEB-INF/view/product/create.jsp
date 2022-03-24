@@ -6,7 +6,7 @@
 		<h4>Add New Product</h4>
 	</div>
 	<div>
-		<form>
+		<form id="productAddForm" name="productAddForm">
 		<div class="form-row">
 			  <div class="form-group col-md-6">
 			      <label for="categorycode">Category code</label>
@@ -56,9 +56,10 @@
 <jsp:include page="/WEB-INF/view/common/footer.jsp" />
 <script type="text/javascript">
 $(document).ready(function(){
-    $("select.categorycode").change(function(){
+    $("#categorycode").change(function(){
         var selectedcat = $(this).children("option:selected").val();
-        
+        /* console.log(selectedcat); */
+        $("#productAddForm").ajaxSubmit({url: '/product/searchSubcat', type: 'post'})
     });
 });
 </script>

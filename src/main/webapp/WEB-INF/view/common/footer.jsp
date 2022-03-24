@@ -62,8 +62,10 @@
 <!-- <script src="/resources/admin/js/demo/chart-area-demo.js"></script>
 <script src="/resources/admin/js/demo/chart-pie-demo.js"></script>
  -->
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
+ <!-- datatable javascript -->
+<script type="text/javascript" src="/resources/vendor/datatable/jquery.dataTables.min.js"></script>
+<!-- jquery form javascript -->
+<script type="text/javascript" src="/resources/vendor/ajax/jquery.form.min.js"></script>
 </body>
 
 </html>

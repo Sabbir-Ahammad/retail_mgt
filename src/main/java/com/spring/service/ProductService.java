@@ -2,6 +2,8 @@ package com.spring.service;
 
 import com.spring.dao.ProductDAO;
 import com.spring.model.Product;
+import com.spring.model.SubCategory;
+
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,14 @@ public class ProductService{
 
 	@Autowired
     ProductDAO productDAO;
+	
+	public SubCategory getValue(HttpServletRequest request) {
+		String stringPartToDevide = request.getParameter("categorycode");
+		String[] stringPart = stringPartToDevide.split("-");
+		String stringPart1 = stringPart[0];
+		String stringPart2 = stringPart[1];
+		return null;
+	}
 
     
     public Product save(HttpServletRequest request){
