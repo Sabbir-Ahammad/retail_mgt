@@ -1,14 +1,27 @@
 package com.spring.service;
 
+import com.spring.common.FileSaveUtil;
+import com.spring.dao.CategoryDAO;
 import com.spring.dao.ProductDAO;
+import com.spring.dao.SubCategoryDAO;
+import com.spring.dao.SupplierDAO;
+import com.spring.model.Category;
 import com.spring.model.Product;
 import com.spring.model.SubCategory;
+import com.spring.model.Supplier;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.model.Product;
 
@@ -19,30 +32,56 @@ public class ProductService{
 	@Autowired
     ProductDAO productDAO;
 	@Autowired
-	SubCategoryService subCat;
+	SubCategoryDAO subCategoryDAO;
+	@Autowired
+	CategoryDAO categoryDAO;
+	@Autowired
+	SupplierDAO supplierDAO;
 	
-	public List<SubCategory> getSubCatValue(String catCode) {
-		/*
-		 * String stringPartToDevide = request.getParameter("categorycode"); String[]
-		 * stringPart = stringPartToDevide.split("-"); String stringPart1 =
-		 * stringPart[0]; String stringPart2 = stringPart[1];
-		 * System.out.println(stringPart1);
-		 */
+	public List<Category> getAllCategory() {
+		return categoryDAO.getAll();
+	}
+	public List<Supplier> getAllSupplier(){
+		return supplierDAO.getAll();
+	}
 	
-		return null;
+	public List<SubCategory> getSubCatValue(String category) {
+		return subCategoryDAO.getAll(category);
+	}
+	public String getCatCode(String name) {
+		return categoryDAO.getCategoryByName(name).getCode();
 	}
 
     
-    public Product save(HttpServletRequest request){
-        //Map<String, String[]> map = request.getParameterMap();
-        String name = request.getParameter("name");
+	public Product save(HttpServletRequest request, MultipartFile file){
+		String cCode = request.getParameter("category");
+		String cName = categoryDAO.getCategoryByCode(cCode).getName();
         Product p = new Product();
-        p.setName(name);
-        p.setQuantity(Integer.valueOf(request.getParameter("qty")));
-        p.setPrice(Double.valueOf(request.getParameter("price")));
+        p.setProductCode(request.getParameter("productCode"));
+        p.setProductName(request.getParameter("productName"));
+        p.setCategoryName(cName);
+        p.setSubCategoryName(request.getParameter("subcategory"));
+        p.setSupplierName(request.getParameter("supplier"));
+        p.setProductImage(file.getOriginalFilename());
+        upload(file);
         return productDAO.save(p);
     }
 
+	//	write file to local disk
+	public MultipartFile upload(MultipartFile file) {
+		String image = file.getOriginalFilename().toString();
+		try {
+			File saveFile = new File(FileSaveUtil.fileLocation(), image);
+			InputStream imageFile = file.getInputStream();
+			Files.copy(imageFile, saveFile.toPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("file name : " + image);
+		return null;
+	}
+	
     public List<Product> getAll() {
         return productDAO.getAll();
     }
@@ -51,13 +90,7 @@ public class ProductService{
         return productDAO.getProductById(pid);
     }
 
-    public Product update(HttpServletRequest request) {
-        String name = request.getParameter("name");
-        Product p = new Product();
-        p.setId(Integer.valueOf(request.getParameter("id")));
-        p.setName(name);
-        p.setQuantity(Integer.valueOf(request.getParameter("qty")));
-        p.setPrice(Double.valueOf(request.getParameter("price")));
+    public Product update(Product p) {
         return productDAO.update(p);
     }
 

@@ -34,7 +34,7 @@ public class CategoryService implements ICategoryService{
 	}
 
 	@Override
-	public Category edit(String id) {
+	public Category edit(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -53,11 +53,17 @@ public class CategoryService implements ICategoryService{
 		return categoryDAO.getAll();
 	}
 
-	@Override
+	
 	public boolean delete(String id) {
 		Category c = categoryDAO.getCategoryByCode(id);
 		categoryDAO.delete(c);
 		return true;
+	}
+
+	@Override
+	public boolean delete(int id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

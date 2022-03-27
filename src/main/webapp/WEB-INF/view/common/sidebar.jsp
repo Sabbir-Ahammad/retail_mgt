@@ -54,7 +54,7 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<!-- <h6 class="collapse-header">Custom Components:</h6> -->
 						<a class="collapse-item" href="buttons.html">Customer</a> 
-						<a class="collapse-item" href="cards.html">Supplier</a>
+						<a class="collapse-item" href="/supplier/create">Supplier</a>
 					</div>
 				</div>
 			</li>

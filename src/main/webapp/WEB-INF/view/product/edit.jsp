@@ -7,11 +7,11 @@
 			<h4>Add New Product</h4>
 		</div>
 		<form id="productAddForm" name="productAddForm" method="post"
-			action="/product/save" enctype="multipart/form-data">
+			action="/product/update" enctype="multipart/form-data">
 			<label for="suppliercode">Supplier</label>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<select class="form-control" id="supplier" name="supplier">
+					<select class="form-control" id="supplierName" name="supplierName">
 						<c:forEach items="${data.suppliers}" var="s">
 				    		<option>${s.supplierName}</option>
 				    	</c:forEach>
@@ -21,7 +21,7 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="category">Category</label> 
-					<select class="form-control" id="category" name="category">
+					<select class="form-control" id="categoryName" name="categoryName">
 						<c:forEach items="${data.categories}" var="c">
 							<option value="${c.code}">${c.code}<span>-</span>${c.name}</option>
 						</c:forEach>
@@ -29,7 +29,7 @@
 				</div>
 				<div class="form-group col-md-6">
 					<label for="subcategory">Sub-Category</label> 
-					<select class="form-control" id="subcategory" name="subcategory">
+					<select class="form-control" id="subCategoryName" name="subCategoryName">
 						<!-- <option>Please select a Category</option> -->
 					</select>
 				</div>
@@ -37,22 +37,25 @@
 
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="productcode">Product code</label> <input
-						class="form-control" id="productCode" name="productCode" placeholder="Product code">
+					<label for="productcode">Product code</label>
+					<input
+						type="hidden" class="form-control" id="id" name="id" value="${data.product.id}">
+					<input
+						class="form-control" id="productCode" name="productCode" value="${data.product.productCode}">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="productname">Product Name</label> <input
-						class="form-control" id="productName" name="productName" placeholder="Product Name">
+						class="form-control" id="productName" name="productName" placeholder="Product Name" value="${data.product.productName}">
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<label for="tags">image</label> <input class="form-control"
-						id="image" type="file" name="image" onchange="loadFile(event)" />
+						id="image" type="file" name="image" onchange="loadFile(event)" src="${data.imgLocation} + '\\' + ${data.product.productImage}"/>
 					<div class="form-group col-md-12 mt-2"><img class="center-block" id="output" width="200px" /></div>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Add Product</button>
+			<button type="submit" class="btn btn-primary">Update Product</button>
 		</form>
 	</div>
 </div>
@@ -60,17 +63,17 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		callMe();
-		$("#category").change(function() {
+		$("#categoryName").change(function() {
 			callMe();
 		});
 	});
 	
 	/* load subcategory */
 	function callMe(){
-		$.post( "/product/searchSubcat/"+$("#category :selected").val(), function( data ) {
-			 $("#subcategory").html("");
+		$.post( "/product/searchSubcat/"+$("#categoryName :selected").val(), function( data ) {
+			 $("#subCategoryName").html("");
 			 for(i=0; i<data.length; i++){
-				 $("#subcategory").append("<option>"+data[i].subCategoryName+"</option>");
+				 $("#subCategoryName").append("<option>"+data[i].subCategoryName+"</option>");
 			 }
 		});
 	}
@@ -80,4 +83,11 @@
 		var image = document.getElementById('output');
 		image.src = URL.createObjectURL(event.target.files[0]);
 	};
+	
+	var catCode =  "${data.catCode}";
+	$("#categoryName option[value='"+catCode+"']").attr("selected", true);
+	var subCatName =  "${data.product.subCategoryName}";
+	$("#subCategoryName option[value='"+subCatName+"']").attr("selected", true);
+	var supName =  "${data.product.supplierName}";
+	$("#supplierName option[value='"+supName+"']").attr("selected", true);
 </script>

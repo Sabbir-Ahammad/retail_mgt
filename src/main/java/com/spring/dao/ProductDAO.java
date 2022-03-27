@@ -45,16 +45,14 @@ public class ProductDAO {
     }
 
     public Product update(Product p) {
-        String hql = "update product set name = '"+p.getName()+"', quantity = '"+p.getQuantity()+"', price = '"+p.getPrice()+"'  where id = '"+p.getId()+"'";
-        Query q = getSession().createQuery(hql);
-        q.executeUpdate();
+        getSession().update(p);
         getSession().flush();
         return p;
     }
 
 
     public Product delete(Product p) {
-    	String sql = "delete product where id = '"+p.getId()+"'";
+    	String sql = "delete product where id = '"+p+"'";
         int delete = getSession().createQuery(sql).executeUpdate();
         return p;
     }

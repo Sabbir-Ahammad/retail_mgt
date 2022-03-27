@@ -26,32 +26,12 @@ public class SubCategoryDAO implements SubCategoryRepository {
 	private Session getSession() {
 		return entityManager.unwrap(Session.class);
 	}
-
+	
 	public SubCategory save(SubCategory c) {
 		getSession().save(c);
 		getSession().flush();
 		return c;
 	}
-
-	/*
-	 * public List<SubCategory> getAll() { String sql =
-	 * "SELECT subcategory.sub_category_code, subcategory.sub_category_name, subcategory.category_code, category.name "
-	 * +
-	 * "FROM subcategory RIGHT JOIN category WITH subcategory.category_code=category.code"
-	 * ;
-	 * 
-	 * String sql =
-	 * "SELECT subcategory.sub_category_code, subcategory.sub_category_name, subcategory.category_code, category.name\r\n"
-	 * +
-	 * "FROM subcategory RIGHT JOIN category ON subcategory.category_code=category.code"
-	 * ;
-	 * 
-	 * List<SubCategory> subCategorys = getSession().createQuery(sql).list();
-	 * List<SubCategory> subCategorys = getSession().createSQLQuery(sql).list(); for
-	 * (int i = 0; i < subCategorys.size(); i++) {
-	 * System.out.println(subCategorys.get(i).getSubCategoryCode()); } return
-	 * subCategorys; }
-	 */
 
 	public List<SubCategory> getAll() {
 		//String sql = "from subcategory";
@@ -59,10 +39,6 @@ public class SubCategoryDAO implements SubCategoryRepository {
 		String sql = "select * from subcategory";
 	    NativeQuery<SubCategory> q = getSession().createNativeQuery(sql, SubCategory.class);
 	    List<SubCategory> scat = q.getResultList();
-//		  for (int i = 0; i < scat.size(); i++) {
-//		  System.out.println(scat.get(i).getCategoryName() + " ..............."); 
-//		  }
-//		
 		return scat;
 	}
 
@@ -94,5 +70,11 @@ public class SubCategoryDAO implements SubCategoryRepository {
 		String sql = "from subcategory where category_code = '" + catCode + "'";
 		List<SubCategory> cList = getSession().createQuery(sql).list();
 		return cList;
+	}
+
+	@Override
+	public SubCategory getByID(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -18,6 +18,8 @@
 <!-- datatable -->
 <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
+<link href="/resources/css/custom.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body id="page-top">
 

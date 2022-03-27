@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.codec.multipart.Part;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +31,7 @@ import com.spring.dao.SubCategoryDAO;
 import com.spring.model.Category;
 import com.spring.model.Product;
 import com.spring.model.SubCategory;
+import com.spring.model.Supplier;
 import com.spring.service.ProductService;
 
 @RestController
@@ -41,84 +44,73 @@ import com.spring.service.ProductService;
 public class ProductController {
 
 	@Autowired
-	CategoryDAO catdao;
-
-	@Autowired
-	SubCategoryDAO subCategoryDAO;
-	
-	@Autowired
 	ProductService productService;
 
+//	Get Categories and suppliers
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
-		List<Category> categorys = catdao.getAll();
-		return new ModelAndView("product/create", "categorys", categorys);
+		List<Category> categorys = productService.getAllCategory();
+		List<Supplier> suppliers = productService.getAllSupplier();
+		Map data = new HashMap();
+		data.put("categories", categorys);
+		data.put("suppliers", suppliers);
+		return new ModelAndView("product/create", "data", data);
 	}
 	
+//	search subcategory through category
 	@RequestMapping(value = "/searchSubcat/{category}", method = RequestMethod.POST)
 	public List<SubCategory> getValue(HttpServletRequest request, @PathVariable("category") String category) {
-		List<SubCategory> subcat = productService.getSubCatValue(category);
-		return subCategoryDAO.getAll(category);
+		return productService.getSubCatValue(category);
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView save(HttpServletRequest request, @RequestParam("image") MultipartFile file) {
-//        Product p = productService.save(request);
-		String image = file.getOriginalFilename().toString();
-		try {
-			
-			File saveFile = new File(FileSaveUtil.fileLocation(), image);
-			InputStream imageFile = file.getInputStream();
-			Files.copy(imageFile, saveFile.toPath());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("file name : " + image);
-		
-//		Map<String, String[]> map = request.getParameterMap();
-//		Set<String> key = map.keySet();
-//		for (int i = 0; i < map.size(); i++) {
-//			for (String k : key) {
-//				System.out.println("... " + k + "   " + request.getParameter(k));
-//			}
-//
-//		}
-
+        Product p = productService.save(request, file);
 		return new ModelAndView("product/create");
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView edit(@PathVariable String id) {
 		int pid = Integer.valueOf(id);
-		Product p = productService.getProductById(pid);
-		return new ModelAndView("product/edit", "p", p);
+		Product product = productService.getProductById(pid);
+		String catCode = productService.getCatCode(product.getCategoryName());
+		List<Category> categorys = productService.getAllCategory();
+		List<Supplier> suppliers = productService.getAllSupplier();
+		Map data = new HashMap();
+		data.put("categories", categorys);
+		data.put("suppliers", suppliers);
+		data.put("product", product);
+		data.put("catCode", catCode);
+		data.put("imgLocation", FileSaveUtil.fileLocation());
+		return new ModelAndView("product/edit", "data", data);
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest request) {
-		Product p = productService.update(request);
-		return new ModelAndView("product/show");
+	public ModelAndView update(HttpServletRequest request, @ModelAttribute Product product) {
+		Product p = productService.update(product);
+		List<Product> products = productService.getAll();
+		return new ModelAndView("product/view", "products", products);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable String id) {
 		int pid = Integer.valueOf(id);
 		Product p = productService.delete(pid);
-		return new ModelAndView("product/edit", "p", p);
-	}
-
-	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public ModelAndView view() {
 		List<Product> products = productService.getAll();
-		return new ModelAndView("product/show", "products", products);
+		return new ModelAndView("product/view", "products", products);
 	}
 
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public Object view1() {
+	public ModelAndView view() {
 		List<Product> products = productService.getAll();
-		Gson g = new Gson();
-		return g.toJson(products.get(0));
+		return new ModelAndView("product/view", "products", products);
 	}
+
+//	@RequestMapping(value = "/view", method = RequestMethod.GET)
+//	public Object view1() {
+//		List<Product> products = productService.getAll();
+//		Gson g = new Gson();
+//		return g.toJson(products.get(0));
+//	}
 
 }

@@ -39,7 +39,7 @@ public class SubCategoryService implements ISubCategoryService {
 	}
 
 	@Override
-	public SubCategory edit(String id) {
+	public SubCategory edit(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -74,11 +74,17 @@ public class SubCategoryService implements ISubCategoryService {
 		return subCategory;
 	}
 
-	@Override
+	
 	public boolean delete(String id) {
 		SubCategory sc = new SubCategory();
 		sc = subcatdao.delete(sc);
 		return true;
+	}
+
+	@Override
+	public boolean delete(int id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

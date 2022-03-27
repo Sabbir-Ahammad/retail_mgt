@@ -47,6 +47,13 @@ public class CategoryDAO {
         return cList.get(0);
 
     }
+    
+    public Category getCategoryByName(String name) {
+        String sql = "from category where name = '" + name + "'";
+        List<Category> cList = getSession().createQuery(sql).list();
+        return cList.get(0);
+
+    }
 
     public Category update(Category c) {
         String hql = "update category set name = '"+c.getName()+"', description = '"+c.getDescription()+"'  where code = '"+c.getCode()+"'";
