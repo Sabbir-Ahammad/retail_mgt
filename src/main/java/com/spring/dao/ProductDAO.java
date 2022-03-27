@@ -52,8 +52,12 @@ public class ProductDAO {
 
 
     public Product delete(Product p) {
-    	String sql = "delete product where id = '"+p+"'";
-        int delete = getSession().createQuery(sql).executeUpdate();
+    	getSession().delete(p);
+    	getSession().flush();
+		/*
+		 * String sql = "delete product where id = '"+p+"'"; int delete =
+		 * getSession().createQuery(sql).executeUpdate();
+		 */
         return p;
     }
 	
