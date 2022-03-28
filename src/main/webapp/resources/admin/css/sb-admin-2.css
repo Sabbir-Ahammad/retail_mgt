@@ -7757,7 +7757,7 @@ button.bg-dark:focus {
 
 .mb-4,
 .my-4 {
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 1.0rem !important;
 }
 
 .ml-4,
@@ -10168,7 +10168,7 @@ a:focus {
 }
 
 .topbar {
-  height: 4.375rem;
+  height: 3.375rem;
 }
 
 .topbar #sidebarToggleTop {

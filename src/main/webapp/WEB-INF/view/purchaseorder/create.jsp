@@ -4,7 +4,7 @@
 <div>
 	<div class="border m-2 p-5">
 		<div style="text-align: center;">
-			<h4>Add New Product</h4>
+			<h4>Add a purchase order</h4>
 		</div>
 		<form id="productAddForm" name="productAddForm" method="post"
 			action="/product/save" enctype="multipart/form-data">

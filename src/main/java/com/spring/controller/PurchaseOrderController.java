@@ -2,17 +2,19 @@ package com.spring.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.controller.impl.IPurchaseController;
 @RestController
-public class PurchaseController implements IPurchaseController{
+@RequestMapping(value = "purchaseorder")
+public class PurchaseOrderController implements IPurchaseController{
 
 	@Override
+	@RequestMapping(value = "/create")
 	public ModelAndView create() {
-		
-		return null;
+		return new ModelAndView("purchaseorder/create");
 	}
 
 	@Override
