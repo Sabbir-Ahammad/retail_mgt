@@ -2,6 +2,6 @@ package com.spring.controller.impl;
 
 import com.spring.common.ICommonController;
 
-public interface IPurchaseController extends ICommonController{
+public interface IPurchaseOrderController extends ICommonController{
 
 }

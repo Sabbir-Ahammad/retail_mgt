@@ -1,20 +1,29 @@
 package com.spring.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.controller.impl.IPurchaseOrderController;
+import com.spring.controller.impl.IPricingController;
+import com.spring.model.Product;
+import com.spring.service.PricingService;
 @RestController
-@RequestMapping(value = "purchaseorder")
-public class PurchaseOrderController implements IPurchaseOrderController{
+@RequestMapping(value = "pricing")
+public class PricingController implements IPricingController{
 
+	@Autowired
+	PricingService pricingService;
+	
 	@Override
 	@RequestMapping(value = "/create")
 	public ModelAndView create() {
-		return new ModelAndView("purchaseorder/create");
+		List<Product> products = pricingService.getAllProducts();
+		return new ModelAndView("pricing/create","products", products);
 	}
 
 	@Override

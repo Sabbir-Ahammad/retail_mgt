@@ -10,11 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.dao.impl.ProductRepository;
 import com.spring.model.Product;
 
 @Repository(value = "productDAO")
 @Transactional
-public class ProductDAO {
+public class ProductDAO implements ProductRepository{
 
     @Autowired
     private EntityManager entityManager;
@@ -37,8 +38,8 @@ public class ProductDAO {
         return products;
     }
 
-    public Product getProductById(int pid) {
-        String sql = "from product where id = '" + pid + "'";
+    public Product getProductById(int id) {
+        String sql = "from product where id = '" + id + "'";
         List<Product> empList = getSession().createQuery(sql).list();
         return empList.get(0);
 
@@ -60,6 +61,21 @@ public class ProductDAO {
 		 */
         return p;
     }
+
+
+	@Override
+	public Product getByID(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Product> getProductsBySupplier(String supplierName) {
+		String sql = "from product where supplier_name = '" + supplierName + "'";
+        List<Product> products = getSession().createQuery(sql).list();
+		return products;
+	}
 	
 	
 }

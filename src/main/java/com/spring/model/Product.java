@@ -26,6 +26,14 @@ public class Product {
     private String supplierName;
     @Column(name = "productImage")
     private String productImage;
+    @Column(name = "price")
+    private double price;
+    @Column(name = "taxRate")
+    private double taxRate;
+    @Column(name = "discount")
+    private double discount;
+    @Column(name = "sellingPrice")
+    private double sellingPrice;
 	public int getId() {
 		return id;
 	}
@@ -68,5 +76,30 @@ public class Product {
 	public void setProductImage(String productImage) {
 		this.productImage = productImage;
 	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public double getTaxRate() {
+		return taxRate;
+	}
+	public void setTaxRate(double taxRate) {
+		this.taxRate = taxRate;
+	}
+	public double getDiscount() {
+		return discount;
+	}
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+	public double getSellingPrice() {
+		return sellingPrice;
+	}
+	public void setSellingPrice(double sellingPrice) {
+		this.sellingPrice = sellingPrice;
+	}
+	
     
 }

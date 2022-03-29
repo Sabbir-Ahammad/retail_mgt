@@ -4,26 +4,14 @@
 <div>
 	<div class="border m-2 p-1">
 		<div style="text-align: center;">
-			<h4>Add a purchase order</h4>
+			<h4>Set Pricing</h4>
 		</div>
 		<hr></hr>
 		<form id="purchaseOrderForm" name="purchaseOrderForm" method="post"
 			action="/product/save" enctype="multipart/form-data">
 			<div class="row">
 					<div class="form-group col-md-3">
-						<div class="form-group">
-							<label for="suppliercode">Lot number</label>
-							<input class="form-control" id="lotNumber" name="lotNumber"/>
-						</div>
-						<div class="form-group">
-							<label for="productcode">Product</label> <input
-								class="form-control" id="productCode" name="productCode">
-						</div><div class="form-group">
-							<label for="productcode">Description</label> <input
-								class="form-control" id="productCode" name="productCode">
-						</div>
-					</div>
-					<div class="form-group col-md-3">
+					<button class="btn btn-secondary">Scan Bar-Code</button>
 						<div class="form-group">
 							<label for="suppliercode">Supplier</label>
 							<select class="form-control" id="supplier" name="supplier">
@@ -32,7 +20,7 @@
 						    	</c:forEach>
 							</select>
 						</div>
-						<div class="form-group">
+						<%-- <div class="form-group">
 							<label for="category">Category</label> 
 							<select class="form-control" id="category" name="category">
 								<c:forEach items="${data.categories}" var="c">
@@ -45,29 +33,37 @@
 							<select class="form-control" id="subcategory" name="subcategory">
 								<!-- <option>Please select a Category</option> -->
 							</select>
+						</div> --%>
+						<div class="form-group">
+							<label for="subcategory">Product</label> 
+							<select class="form-control" id="subcategory" name="subcategory">
+								<!-- <option>Please select a Category</option> -->
+							</select>
 						</div>
 					
 					</div>
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-3 border">
 						<div class="form-group">
 							<label for="productcode">Cost per unit</label> <input
 								class="form-control" id="productCode" name="productCode">
 						</div>
 						<div class="form-group">
-							<label for="productname">Charged Price</label> <input
+							<label for="productname">Tax rate</label> <input
 								class="form-control" id="productName" name="productName">
 						</div>
 						<div class="form-group">
-							<label for="productname">Price with Tax</label> <input
-								class="form-control" id="productName" name="productName">
-						</div>
-						<div class="form-group">
-							<label for="productname">Total in Stock</label> <input
+							<label for="productname">Discount</label> <input
 								class="form-control" id="productName" name="productName">
 						</div>
 					</div>
+					<div class="form-group col-md-3 border">
+						<div class="form-group">
+								<label for="productname">Charged Price Per Unit</label> <input
+									class="form-control" id="productName" name="productName">
+						</div>
+					</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Add Product</button>
+			<button type="submit" class="btn btn-primary">Set Pricing</button>
 		</form>
 	</div>
 </div>
