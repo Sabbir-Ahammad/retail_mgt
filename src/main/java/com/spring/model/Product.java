@@ -27,13 +27,13 @@ public class Product {
     @Column(name = "productImage")
     private String productImage;
     @Column(name = "price")
-    private double price;
+    private Double price;
     @Column(name = "taxRate")
-    private double taxRate;
+    private Double taxRate;
     @Column(name = "discount")
-    private double discount;
+    private Double discount;
     @Column(name = "sellingPrice")
-    private double sellingPrice;
+    private Double sellingPrice;
 	public int getId() {
 		return id;
 	}
@@ -76,30 +76,29 @@ public class Product {
 	public void setProductImage(String productImage) {
 		this.productImage = productImage;
 	}
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public double getTaxRate() {
+	public Double getTaxRate() {
 		return taxRate;
 	}
-	public void setTaxRate(double taxRate) {
+	public void setTaxRate(Double taxRate) {
 		this.taxRate = taxRate;
 	}
-	public double getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
-	public void setDiscount(double discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
-	public double getSellingPrice() {
+	public Double getSellingPrice() {
 		return sellingPrice;
 	}
-	public void setSellingPrice(double sellingPrice) {
+	public void setSellingPrice(Double sellingPrice) {
 		this.sellingPrice = sellingPrice;
 	}
-	
     
 }

@@ -52,8 +52,8 @@
 								class="form-control" id="productName" name="productName">
 						</div>
 						<div class="form-group">
-							<label for="productname">Discount</label> <input
-								class="form-control" id="productName" name="productName">
+							<label for="productname">Discount</label> <input type="number"
+								class="form-control" id="discount" name="discount">
 						</div>
 					</div>
 					<div class="form-group col-md-3 border">
