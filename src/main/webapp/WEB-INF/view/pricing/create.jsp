@@ -11,7 +11,18 @@
 			action="/product/save" enctype="multipart/form-data">
 			<div class="row">
 					<div class="form-group col-md-3">
-					<button class="btn btn-secondary">Scan Bar-Code</button>
+						<!-- <div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" name="search">
+						      <div class="input-group-btn">
+						        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+						      </div>
+						</div> -->
+						<div class="input-group">
+					      <input type="text" class="form-control" style="height: 38px" placeholder="Search" name="search">
+					      <div class="input-group-btn">
+					        <button class="btn btn-default border" type="submit"><i class="fa fa-search"></i></button>
+					      </div>
+					    </div>
 						<div class="form-group">
 							<label for="suppliercode">Supplier</label>
 							<select class="form-control" id="supplier" name="supplier">
