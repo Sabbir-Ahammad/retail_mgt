@@ -99,4 +99,7 @@ public class ProductService{
         return productDAO.delete(p);
     }
 	
+    List<Product> getProductsBySupplier(String supplierName){
+    	return productDAO.getProductsBySupplier(supplierName);
+    }
 }

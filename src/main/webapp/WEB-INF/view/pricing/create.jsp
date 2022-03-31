@@ -11,16 +11,10 @@
 			action="/product/save" enctype="multipart/form-data">
 			<div class="row">
 					<div class="form-group col-md-3">
-						<!-- <div class="input-group">
-							<input type="text" class="form-control" placeholder="Search" name="search">
-						      <div class="input-group-btn">
-						        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-						      </div>
-						</div> -->
 						<div class="input-group">
 					      <input type="text" class="form-control" style="height: 38px" placeholder="Search" name="search">
 					      <div class="input-group-btn">
-					        <button class="btn btn-default border" type="submit"><i class="fa fa-search"></i></button>
+					        <button class="btn btn-default border" type="button"><i class="fa fa-search"></i></button>
 					      </div>
 					    </div>
 						<div class="form-group">
@@ -31,23 +25,9 @@
 						    	</c:forEach>
 							</select>
 						</div>
-						<%-- <div class="form-group">
-							<label for="category">Category</label> 
-							<select class="form-control" id="category" name="category">
-								<c:forEach items="${data.categories}" var="c">
-									<option value="${c.code}">${c.code}<span>-</span>${c.name}</option>
-								</c:forEach>
-							</select> 
-						</div>
 						<div class="form-group">
-							<label for="subcategory">Sub-Category</label> 
-							<select class="form-control" id="subcategory" name="subcategory">
-								<!-- <option>Please select a Category</option> -->
-							</select>
-						</div> --%>
-						<div class="form-group">
-							<label for="subcategory">Product</label> 
-							<select class="form-control" id="subcategory" name="subcategory">
+							<label for="product">Product</label> 
+							<select class="form-control" id="product" name="product">
 								<!-- <option>Please select a Category</option> -->
 							</select>
 						</div>
@@ -79,28 +59,20 @@
 	</div>
 </div>
 <jsp:include page="/WEB-INF/view/common/footer.jsp" />
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	$(document).ready(function() {
-		callMe();
-		$("#category").change(function() {
+		getSuppliers();
+		$("#supplier").change(function() {
 			callMe();
 		});
-	});
 	
 	/* load subcategory */
-	function callMe(){
-		$.post( "/product/searchSubcat/"+$("#category :selected").val(), function( data ) {
-			 $("#subcategory").html("");
+	function getSuppliers(){
+		$.post( "/pricing/searchProduct/"+$("#supplier :selected").val(), function( data ) {
+			 $("#product").html("");
 			 for(i=0; i<data.length; i++){
-				 $("#subcategory").append("<option>"+data[i].subCategoryName+"</option>");
+				 $("#product").append("<option>"+data.products+"</option>");
 			 }
 		});
-	}
-	
-	/* view image */
-	var loadFile = function(event) {
-		var image = document.getElementById('output');
-		image.src = URL.createObjectURL(event.target.files[0]);
-	};
+	} 
 </script>
- -->

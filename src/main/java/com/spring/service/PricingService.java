@@ -9,13 +9,16 @@ import org.springframework.stereotype.Service;
 
 import com.spring.dao.ProductDAO;
 import com.spring.model.Product;
+import com.spring.model.Supplier;
 import com.spring.service.impl.IPricingService;
 
 @Service(value = "pricingService")
 public class PricingService implements IPricingService{
 
 	@Autowired
-	ProductDAO productDAO;
+	ProductService productService;
+	@Autowired
+	SupplierService supplierService;
 	
 	@Override
 	public Product save(HttpServletRequest request) {
@@ -49,12 +52,17 @@ public class PricingService implements IPricingService{
 
 	@Override
 	public List<Product> getProductsBySupplierName(String supplierName) {
-		return productDAO.getProductsBySupplier(supplierName);
+		return productService.getProductsBySupplier(supplierName);
 	}
 
 	@Override
 	public List<Product> getAllProducts() {
-		return productDAO.getAll();
+		return productService.getAll();
+	}
+
+	@Override
+	public List<Supplier> getAllSupplier() {
+		return supplierService.getAll();
 	}
 
 }
