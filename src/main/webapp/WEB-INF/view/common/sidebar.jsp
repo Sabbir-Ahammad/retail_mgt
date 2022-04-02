@@ -39,7 +39,7 @@
 						<a class="collapse-item" href="/category/view">Category</a>
 						<a class="collapse-item" href="/subcategory/view">Sub-Category</a>
 						<a class="collapse-item" href="/product/create">Products</a>
-						<a class="collapse-item" href="/pricing/create">Products pricing</a>
+						<a class="collapse-item" href="/pricing/view">Products pricing</a>
 						<a class="collapse-item" href="/purchaseorder/create">Purchase Products</a>
 					</div>
 				</div>

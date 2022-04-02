@@ -103,5 +103,12 @@ public class Product {
 	public void setSellingPrice(Double sellingPrice) {
 		this.sellingPrice = sellingPrice;
 	}
+	public Double getProfitMargin() {
+		return profitMargin;
+	}
+	public void setProfitMargin(Double profitMargin) {
+		this.profitMargin = profitMargin;
+	}
+	
     
 }

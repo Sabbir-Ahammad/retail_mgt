@@ -14,7 +14,7 @@ public class PurchaseOrderController implements IPurchaseOrderController{
 	@Override
 	@RequestMapping(value = "/create")
 	public ModelAndView create() {
-		return new ModelAndView("purchaseorder/create");
+		return new ModelAndView("purchaseorder/orderproduct");
 	}
 
 	@Override

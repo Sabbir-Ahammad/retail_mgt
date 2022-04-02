@@ -38,7 +38,7 @@
 					<div class="form-group col-md-3 border">
 					<div class="form-group">
 							<label for="productname">Margin Rate</label> <input
-								class="form-control" id="marginrate" name="marginrate" value="">
+								class="form-control" id="profitMargin" name="profitMargin" value="${pDetail.profitMargin}">
 						</div>
 						<div class="form-group">
 							<label for="productname">Charged Price Per Unit</label> <input
@@ -59,8 +59,10 @@ $( "input" ).change(function() {
 	var lessDiscount = unitCostf - discountf;
 	var taxratef = (parseFloat($('#discount').val())) * lessDiscount;
 	var lesstax =  lessDiscount + taxratef;
-	var margin = (parseFloat($('#marginrate').val())) * lesstax;
+	var margin = (parseFloat($('#profitMargin').val())) * lesstax;
+	console.log($('#marginrate').val() + " margin");
 	var withProfit = lesstax + margin;
+	console.log(withProfit + " with profit");
 	var chargedPrice = unitCostf - discountf - taxratef;
 	$('#sellingPrice').val(withProfit);
 	});
