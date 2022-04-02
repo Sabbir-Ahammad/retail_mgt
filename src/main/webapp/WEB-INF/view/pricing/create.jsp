@@ -1,5 +1,5 @@
 <jsp:include page="/WEB-INF/view/common/header.jsp" />
-<jsp:include page="/WEB-INF/view/product/common.jsp" />
+<jsp:include page="/WEB-INF/view/pricing/common.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
 	<div class="border m-2 p-1">
@@ -8,7 +8,7 @@
 		</div>
 		<hr></hr>
 		<form id="purchaseOrderForm" name="purchaseOrderForm" method="post"
-			action="/product/save" enctype="multipart/form-data">
+			action="/pricing/update" enctype="multipart/form-data">
 			<div class="row">
 					<div class="form-group col-md-3">
 						<div class="input-group">
@@ -31,26 +31,25 @@
 								<!-- <option>Please select a Category</option> -->
 							</select>
 						</div>
-					
 					</div>
 					<div class="form-group col-md-3 border">
 						<div class="form-group">
 							<label for="productcode">Cost per unit</label> <input
-								class="form-control" id="productCode" name="productCode">
+								class="form-control" id="unitCost" name="unitCost">
 						</div>
 						<div class="form-group">
 							<label for="productname">Tax rate</label> <input
-								class="form-control" id="productName" name="productName">
+								class="form-control" id="taxRate" name="taxRate">
 						</div>
 						<div class="form-group">
-							<label for="productname">Discount</label> <input type="number"
+							<label for="productname">Discount</label> <input
 								class="form-control" id="discount" name="discount">
 						</div>
 					</div>
 					<div class="form-group col-md-3 border">
 						<div class="form-group">
-								<label for="productname">Charged Price Per Unit</label> <input
-									class="form-control" id="productName" name="productName">
+							<label for="productname">Charged Price Per Unit</label> <input
+								class="form-control" id="sellingPrice" name="sellingPrice">
 						</div>
 					</div>
 			</div>
@@ -61,18 +60,34 @@
 <jsp:include page="/WEB-INF/view/common/footer.jsp" />
 <script type="text/javascript">
 	$(document).ready(function() {
-		getSuppliers();
+		getProducts();
+		
 		$("#supplier").change(function() {
-			callMe();
+			getProducts();
+			/* getProductDetail(); */
 		});
-	
-	/* load subcategory */
-	function getSuppliers(){
-		$.post( "/pricing/searchProduct/"+$("#supplier :selected").val(), function( data ) {
+		
+		$("#product").change(function() {
+			getProductDetail();
+		});
+	});
+	/* load products for supplier */
+	function getProducts(){
+		$.post( "/pricing/searchProduct/"+$("#supplier :selected").val(), function( productList ) {
 			 $("#product").html("");
-			 for(i=0; i<data.length; i++){
-				 $("#product").append("<option>"+data.products+"</option>");
+			 for(i=0; i<productList.length; i++){
+				 $("#product").append("<option>"+productList[i].productName+"</option>");
 			 }
 		});
-	} 
+	}
+	/* load product detail */
+	function getProductDetail(){
+		$.post("/pricing/searchProductDetail/"+$("#product :selected").val(), function( product ){
+			/* console.log(product.unitCost); */
+			$("#unitCost").val(product.unitCost);
+			$("#taxRate").val(product.taxRate);
+			$("#discount").val(product.discount);
+			$("#sellingPrice").val(product.sellingPrice);
+		});
+	}
 </script>

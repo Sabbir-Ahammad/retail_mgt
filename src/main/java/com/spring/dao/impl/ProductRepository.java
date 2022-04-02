@@ -7,4 +7,5 @@ import com.spring.model.Product;
 
 public interface ProductRepository extends ICommonDAO<Product>{
 	public List<Product> getProductsBySupplier(String supplierName);
+	public Product getProductDetails(String productName);
 }

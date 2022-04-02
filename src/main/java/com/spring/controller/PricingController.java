@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,6 +43,11 @@ public class PricingController implements IPricingController{
 	public List<Product> getValue(HttpServletRequest request, @PathVariable("supplier") String supplier) {
 		return pricingService.getProductsBySupplierName(supplier);
 	}
+	
+	@RequestMapping(value = "/searchProductDetail/{product}", method = RequestMethod.POST)
+	public Product getProductValue(HttpServletRequest request, @PathVariable("product") String product) {
+		return pricingService.getProductsDetails(product);
+	}
 
 	@Override
 	public ModelAndView save(HttpServletRequest request) {
@@ -51,14 +57,25 @@ public class PricingController implements IPricingController{
 
 	@Override
 	public ModelAndView edit(String id) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public ModelAndView edit(@PathVariable int id) {
+		Product p = pricingService.getProductById(id);
+		return new ModelAndView("pricing/create", "p", p);
 	}
 
 	@Override
 	public ModelAndView update(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public ModelAndView update(HttpServletRequest request, @ModelAttribute Product product) {
+		Product p = pricingService.update(product);
+		List<Product> productsDetails = pricingService.getAll();
+		return new ModelAndView("pricing/view", "productsDetails", productsDetails);
 	}
 
 	@Override
@@ -68,9 +85,17 @@ public class PricingController implements IPricingController{
 	}
 
 	@Override
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public ModelAndView getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Product> productsDetails = pricingService.getAll();
+		return new ModelAndView("pricing/view", "productsDetails", productsDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/setpricing/{id}", method = RequestMethod.GET)
+	public ModelAndView setPricing(Product p, @PathVariable int id) {
+		Product pDetail = pricingService.getProductById(id);
+		return new ModelAndView("pricing/setpricing", "pDetail", pDetail);
 	}
 
 }

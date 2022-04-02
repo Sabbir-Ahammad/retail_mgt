@@ -37,11 +37,14 @@ public class PricingService implements IPricingService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Product update(Product p) {
+		return productService.updatepricing(p);
+	}
 
 	@Override
 	public List<Product> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return productService.getAll();
 	}
 
 	@Override
@@ -63,6 +66,16 @@ public class PricingService implements IPricingService{
 	@Override
 	public List<Supplier> getAllSupplier() {
 		return supplierService.getAll();
+	}
+
+	@Override
+	public Product getProductsDetails(String productName) {
+		return productService.getProductsDetails(productName);
+	}
+
+	@Override
+	public Product getProductById(int id) {
+		return productService.getProductById(id);
 	}
 
 }

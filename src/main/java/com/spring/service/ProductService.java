@@ -93,6 +93,10 @@ public class ProductService{
     public Product update(Product p) {
         return productDAO.update(p);
     }
+    
+    public Product updatepricing(Product p) {
+    	return productDAO.updatePricing(p);
+    }
 
     public Product delete(int pid) {
         Product p = productDAO.getProductById(pid);
@@ -101,5 +105,9 @@ public class ProductService{
 	
     List<Product> getProductsBySupplier(String supplierName){
     	return productDAO.getProductsBySupplier(supplierName);
+    }
+    
+    Product getProductsDetails(String productName){
+    	return productDAO.getProductDetails(productName);
     }
 }

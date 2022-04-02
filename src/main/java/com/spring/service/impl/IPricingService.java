@@ -8,6 +8,8 @@ import com.spring.model.Supplier;
 
 public interface IPricingService extends ICommonService<Product>{
 
+	public Product getProductById(int id);
+	public Product getProductsDetails(String productName);
 	public List<Product> getProductsBySupplierName(String supplierName);
 	public List<Product> getAllProducts();
 	public List<Supplier> getAllSupplier();

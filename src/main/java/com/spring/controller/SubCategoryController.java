@@ -64,7 +64,6 @@ public class SubCategoryController implements ISubCategoryController{
 		Map data = new HashMap();
 		data.put("subCategory", sc);
 		data.put("category", categorys);
-		//Gson g = new Gson();
 		return new ModelAndView("/subcategory/edit", "data", data);
 	}
 
