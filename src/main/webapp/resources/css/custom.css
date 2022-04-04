@@ -11,3 +11,12 @@
  .tableText{
  	font-size: 12px;
  }
+ 
+ .card-text {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 0.25rem;
+    font-size: 12px;
+    color: #000;
+    text-align: center;
+}

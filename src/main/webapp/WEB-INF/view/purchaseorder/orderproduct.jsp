@@ -106,31 +106,18 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<table id="proTable" class="table table-striped table-bordered" style="width:100%">
-						         <thead>
-						            <tr class="tableText">
-						                <th>Product name</th>
-						                <th>Stored Amount</th>
-						                <th>Average Price</th>
-						            </tr>
-						        </thead>
-						        <%-- <tbody>
-						            <c:forEach items="${products}" var="p">
-						                <tr>
-						                    <td>${p.productCode}</td>
-						                    <td>${p.productName}</td>
-						                    <td>${p.categoryName}</td>
-						                    <td>${p.subCategoryName}</td>
-						                    <td>${p.supplierName}</td>
-						                    <td>
-						                        <a class="btn btn-primary" role="button" href="/product/edit/${p.id}">Edit</a>
-						                        <a class="btn btn-primary" role="button" href="/product/delete/${p.id}">Delete</a>
-						                    </td>
-						                </tr>
-						            </c:forEach>
-						        </tbody> --%>
-						</table>
+					<div class="row border p-2">
+					<c:forTokens items = "Zara,nuha,roshy" delims = "," var = "name">
+						<div class="form-group col-md-2">
+						<a href="" class="text-decoration-none">
+							<div class="card mb-3">
+							  <img src="/resources/image/flag_bangladesh.jpg" class="card-img-top" alt="...">
+							  <div class="card-text">
+							    <p class="card-title">Card title</p>
+							  </div>
+							</div></a>
+						</div>
+				    </c:forTokens>
 					</div>
 				</div>
 			</div>
@@ -140,6 +127,7 @@
 </div>
 <jsp:include page="/WEB-INF/view/common/footer.jsp" />
 <script type="text/javascript">
+const cars = ["Saab", "Volvo", "BMW"];
 	/* $('#proTable').DataTable( {
         "paging":   true,
         "ordering": true,
@@ -155,13 +143,13 @@
     var d = new Date();
     var month = d.getMonth()+1;
     var day = d.getDate();
-    var output = (day<10 ? '0' : '') + day + '/' +
+    var date = (day<10 ? '0' : '') + day + '/' +
         (month<10 ? '0' : '') + month + '/' +
         d.getFullYear();
     
-    $('#orderDate').val(output);
-	/* load subcategory */
-	/* function callMe(){
+    $('#orderDate').val(date);
+	/* load product */
+	function callMe(){
 		$.post( "/product/searchSubcat/"+$("#category :selected").val(), function( data ) {
 			 $("#subcategory").html("");
 			 for(i=0; i<data.length; i++){
@@ -169,7 +157,6 @@
 			 }
 		});
 	}
-	 */
 	/* view image */
 	/* var loadFile = function(event) {
 		var image = document.getElementById('output');

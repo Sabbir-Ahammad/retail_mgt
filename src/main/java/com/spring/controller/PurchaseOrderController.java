@@ -30,11 +30,9 @@ public class PurchaseOrderController implements IPurchaseOrderController{
 	public ModelAndView create() {
 		Map data = new HashMap();
 		List<Supplier> suppliers = purchaseOrderService.getAllSupppliers();
-		List<Category> category = purchaseOrderService.getCategory();
-		List<SubCategory> subCategory = purchaseOrderService.getSubCategory();
+		/* List<Category> category = purchaseOrderService.getCategory(); */
+		/* List<SubCategory> subCategory = purchaseOrderService.getSubCategory(); */
 		data.put("suppliers", suppliers);
-		data.put("category", category);
-		data.put("subCategory", subCategory);
 		return new ModelAndView("purchaseorder/orderproduct", "data", data);
 	}
 
