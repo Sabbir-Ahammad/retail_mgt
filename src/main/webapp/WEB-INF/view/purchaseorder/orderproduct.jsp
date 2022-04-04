@@ -12,7 +12,7 @@
 			<div class="row">
 					<div class="form-group col-md-2">
 						<div class="form-group">
-							<label for="suppliercode">Date</label>
+							<label>Date</label>
 							<input class="form-control" id=orderDate name="orderDate" readonly/>
 						</div>
 						<div class="form-group">

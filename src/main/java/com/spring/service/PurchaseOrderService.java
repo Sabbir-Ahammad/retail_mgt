@@ -1,5 +1,9 @@
 package com.spring.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +42,15 @@ public class PurchaseOrderService implements IPurchaseOrderService{
 	@Override
 	public PurchaseOrder save(HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		//string to date
+		String dateString = "2011-09-09";
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date myDate = formatter.parse(dateString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 

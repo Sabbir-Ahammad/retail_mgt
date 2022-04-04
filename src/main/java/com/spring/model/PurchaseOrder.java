@@ -47,7 +47,7 @@ public class PurchaseOrder {
 	@Column(name = "status")
 	private String status;
 	@Column(name = "orderDate")
-	private String orderDate;
+	private Date orderDate;
 	public int getId() {
 		return id;
 	}
@@ -144,10 +144,10 @@ public class PurchaseOrder {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(String orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 	
