@@ -60,7 +60,7 @@ public class ProductController {
 //	search subcategory through category
 	@RequestMapping(value = "/searchSubcat/{category}", method = RequestMethod.POST)
 	public List<SubCategory> getValue(HttpServletRequest request, @PathVariable("category") String category) {
-		return productService.getSubCatValue(category);
+		return productService.getSubCatValueByCat(category);
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)

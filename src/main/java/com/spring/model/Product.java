@@ -18,8 +18,12 @@ public class Product {
     private String productCode;
     @Column(name = "productName")
     private String productName;
+    @Column(name = "categoryCode")
+    private String categoryCode;
     @Column(name = "categoryName")
     private String categoryName;
+    @Column(name = "subCategoryCode")
+    private String subCategoryCode;
     @Column(name = "subCategoryName")
     private String subCategoryName;
     @Column(name = "supplierName")
@@ -108,6 +112,18 @@ public class Product {
 	}
 	public void setProfitMargin(Double profitMargin) {
 		this.profitMargin = profitMargin;
+	}
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+	public String getSubCategoryCode() {
+		return subCategoryCode;
+	}
+	public void setSubCategoryCode(String subCategoryCode) {
+		this.subCategoryCode = subCategoryCode;
 	}
 	
     

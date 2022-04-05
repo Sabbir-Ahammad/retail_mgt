@@ -86,5 +86,8 @@ public class SubCategoryService implements ISubCategoryService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	List<SubCategory> getAllByCatCode(String catCode){
+		return subcatdao.getAllByCatCode(catCode);
+	}
 }

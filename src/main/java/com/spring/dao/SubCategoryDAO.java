@@ -66,7 +66,7 @@ public class SubCategoryDAO implements SubCategoryRepository {
 		return c;
 	}
 	
-	public List<SubCategory> getAll(String catCode) {
+	public List<SubCategory> getAllByCatCode(String catCode) {
 		String sql = "from subcategory where category_code = '" + catCode + "'";
 		List<SubCategory> cList = getSession().createQuery(sql).list();
 		return cList;

@@ -32,31 +32,35 @@ public class ProductService{
 	@Autowired
     ProductDAO productDAO;
 	@Autowired
-	SubCategoryDAO subCategoryDAO;
+	CategoryService categoryService;
 	@Autowired
-	CategoryDAO categoryDAO;
+	SupplierService supplierService;
 	@Autowired
-	SupplierDAO supplierDAO;
+	SubCategoryService subCategoryService;
 	
 	public List<Category> getAllCategory() {
-		return categoryDAO.getAll();
+		return categoryService.getAll();
 	}
 	public List<Supplier> getAllSupplier(){
-		return supplierDAO.getAll();
+		return supplierService.getAll();
 	}
 	
-	public List<SubCategory> getSubCatValue(String category) {
-		return subCategoryDAO.getAll(category);
+	public List<SubCategory> getSubCatValueByCat(String category) {
+		return subCategoryService.getAllByCatCode(category);
 	}
 	public String getCatCode(String name) {
-		return categoryDAO.getCategoryByName(name).getCode();
+		return categoryService.getCategoryByName(name).getCode();
 	}
 
     
 	public Product save(HttpServletRequest request, MultipartFile file){
+		Product p = new Product();
 		String cCode = request.getParameter("category");
-		String cName = categoryDAO.getCategoryByCode(cCode).getName();
-        Product p = new Product();
+		String sCode = request.getParameter("subcategory");
+		String cName = categoryService.getCategoryByCode(cCode).getName();
+		String scName = subCategoryService.getSubCategoryByCode(sCode).getSubCategoryName();
+        p.setCategoryCode(cCode);
+        p.setSubCategoryCode(sCode);
         p.setProductCode(request.getParameter("productCode"));
         p.setProductName(request.getParameter("productName"));
         p.setCategoryName(cName);

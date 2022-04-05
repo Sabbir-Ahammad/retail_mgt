@@ -8,7 +8,7 @@
 		</div>
 		<form id="productAddForm" name="productAddForm" method="post"
 			action="/product/save" enctype="multipart/form-data">
-			<label for="suppliercode">Supplier</label>
+			<%-- <label for="suppliercode">Supplier</label>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<select class="form-control" id="supplier" name="supplier">
@@ -17,7 +17,7 @@
 				    	</c:forEach>
 					</select>
 				</div>
-			</div>
+			</div> --%>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="category">Category</label> 
@@ -70,7 +70,7 @@
 		$.post( "/product/searchSubcat/"+$("#category :selected").val(), function( data ) {
 			 $("#subcategory").html("");
 			 for(i=0; i<data.length; i++){
-				 $("#subcategory").append("<option>"+data[i].subCategoryName+"</option>");
+				 $("#subcategory").append("<option value="+data[i].subCategoryCode+">"+data[i].subCategoryName+"</option>");
 			 }
 		});
 	}

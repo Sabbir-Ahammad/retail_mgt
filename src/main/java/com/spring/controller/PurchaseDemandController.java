@@ -46,12 +46,14 @@ public class PurchaseDemandController implements IPurchaseDemandController{
 		List<Product> p = purchaseDemandService.getProductBySupplier(supplierName);
 		Set set = new LinkedHashSet();
 		for (int i = 0; i < p.size(); i++) {
-			System.out.println(p.get(i).getCategoryName());
 			set.add(p.get(i).getCategoryName());
-			System.out.println(set);
 		}
 		p.clear();
 		p.addAll(set);
+		for (int j = 0; j < p.size(); j++) {
+			System.out.println(p.get(j));
+		}
+		
 		return p;
 	}
 	
