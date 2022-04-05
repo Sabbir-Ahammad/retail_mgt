@@ -14,14 +14,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.dao.CategoryDAO;
+import com.spring.dao.PurchaseDemandDAO;
 import com.spring.dao.SupplierDAO;
 import com.spring.model.Category;
-import com.spring.model.PurchaseOrder;
+import com.spring.model.Product;
+import com.spring.model.PurchaseDemand;
 import com.spring.model.SubCategory;
 import com.spring.model.Supplier;
-import com.spring.service.impl.IPurchaseOrderService;
-@Service(value = "purchaseOrderService")
-public class PurchaseOrderService implements IPurchaseOrderService{
+import com.spring.service.impl.IPurchaseDemandService;
+@Service(value = "purchaseDemandService")
+public class PurchaseDemandService implements IPurchaseDemandService{
 
 	@Autowired
 	SupplierService supplierService;
@@ -29,18 +31,29 @@ public class PurchaseOrderService implements IPurchaseOrderService{
 	CategoryService categoryService;
 	@Autowired
 	SubCategoryService subcategoryService;
+	@Autowired
+	ProductService productService;
+	
+	@Autowired
+	PurchaseDemandDAO purchaseDemandDAO;
 	
 	public List<Supplier> getAllSupppliers(){
 		return supplierService.getAll();
 	}
-	public List<Category> getCategory(){
-		return categoryService.getAll();
+	
+	public List<Product> getProductBySupplier(String supplierName){
+		return productService.getProductsBySupplier(supplierName);
 	}
+
+	/*
+	 * public List<Category> getCategoryByName(){ return
+	 * categoryService.getCategoryByName(); }
+	 */
 	public List<SubCategory> getSubCategory(){
 		return subcategoryService.getAll();
 	}
 	@Override
-	public PurchaseOrder save(HttpServletRequest request) {
+	public PurchaseDemand save(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		//string to date
 		String dateString = "2011-09-09";
@@ -55,13 +68,13 @@ public class PurchaseOrderService implements IPurchaseOrderService{
 	}
 
 	@Override
-	public PurchaseOrder edit(int id) {
+	public PurchaseDemand edit(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public PurchaseOrder update(HttpServletRequest request) {
+	public PurchaseDemand update(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -79,8 +92,22 @@ public class PurchaseOrderService implements IPurchaseOrderService{
 	}
 	@Override
 	
-	public PurchaseOrder save(PurchaseOrder p) {
+	public PurchaseDemand save(PurchaseDemand p) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> getProductByCategory(String categoryName) {
+		return productService.getProductsByCategory(categoryName);
+	}
+
+	@Override
+	public List<Product> getProductsOnMultipleCriteria(String data) {
+		String[] stringPart = data.split(",");
+		for (int i = 0; i < stringPart.length; i++) {
+			System.out.println(stringPart[i]);
+		}
 		return null;
 	}
 

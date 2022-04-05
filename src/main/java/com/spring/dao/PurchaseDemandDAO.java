@@ -9,11 +9,11 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.spring.dao.impl.PurchaseOrderRepository;
-import com.spring.model.PurchaseOrder;
-@Repository(value = "purchaseOrderDAO")
+import com.spring.dao.impl.PurchaseDemandRepository;
+import com.spring.model.PurchaseDemand;
+@Repository(value = "purchaseDemandDAO")
 @Transactional
-public class PurchaseOrderDAO implements PurchaseOrderRepository{
+public class PurchaseDemandDAO implements PurchaseDemandRepository{
 	
 	@Autowired
     private EntityManager entityManager;
@@ -23,32 +23,32 @@ public class PurchaseOrderDAO implements PurchaseOrderRepository{
     }
 
 	@Override
-	public PurchaseOrder save(PurchaseOrder t) {
+	public PurchaseDemand save(PurchaseDemand t) {
 		
 		getSession().save(t);
 		return null;
 	}
 
 	@Override
-	public List<PurchaseOrder> getAll() {
+	public List<PurchaseDemand> getAll() {
 		
 		return null;
 	}
 
 	@Override
-	public PurchaseOrder getByID(int id) {
+	public PurchaseDemand getByID(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public PurchaseOrder delete(PurchaseOrder t) {
+	public PurchaseDemand delete(PurchaseDemand t) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public PurchaseOrder update(PurchaseOrder t) {
+	public PurchaseDemand update(PurchaseDemand t) {
 		// TODO Auto-generated method stub
 		return null;
 	}

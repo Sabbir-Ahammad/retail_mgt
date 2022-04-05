@@ -79,7 +79,7 @@
 					<div class="row">
 						<div class="form-group col-md-4">
 							<div class="form-group">
-							<label for="suppliercode">Supplier</label>
+							<label>Supplier</label>
 							<select class="form-control" id="supplierName" name="supplierName">
 								<c:forEach items="${data.suppliers}" var="s">
 						    		<option>${s.supplierName}</option>
@@ -91,9 +91,6 @@
 							<div class="form-group">
 							<label for="category">Category</label> 
 							<select class="form-control" id="categoryName" name="categoryName">
-								<c:forEach items="${data.category}" var="c">
-									<option value="${c.code}">${c.code}<span>-</span>${c.name}</option>
-								</c:forEach>
 							</select> 
 						</div>
 						</div>
@@ -109,13 +106,14 @@
 					<div class="row border p-2">
 					<c:forTokens items = "Zara,nuha,roshy" delims = "," var = "name">
 						<div class="form-group col-md-2">
-						<a href="" class="text-decoration-none">
+						<span role="button" tabindex="0">
 							<div class="card mb-3">
 							  <img src="/resources/image/flag_bangladesh.jpg" class="card-img-top" alt="...">
 							  <div class="card-text">
 							    <p class="card-title">Card title</p>
 							  </div>
-							</div></a>
+							</div>
+						</span>
 						</div>
 				    </c:forTokens>
 					</div>
@@ -127,16 +125,21 @@
 </div>
 <jsp:include page="/WEB-INF/view/common/footer.jsp" />
 <script type="text/javascript">
-const cars = ["Saab", "Volvo", "BMW"];
+
 	/* $('#proTable').DataTable( {
         "paging":   true,
         "ordering": true,
         "info":     true
     }); */
 	$(document).ready(function() {
-		
-		$("#supplier").change(function() {
-			callMe();
+		getCategory();
+		getSubCategory();
+		onDropdownvalueChange();
+		$("#supplierName").change(function() {
+			getCategory();
+		});
+		$("#categoryName").change(function() {
+			getSubCategory();
 		});
 	});
     
@@ -148,13 +151,38 @@ const cars = ["Saab", "Volvo", "BMW"];
         d.getFullYear();
     
     $('#orderDate').val(date);
+    
 	/* load product */
-	function callMe(){
-		$.post( "/product/searchSubcat/"+$("#category :selected").val(), function( data ) {
-			 $("#subcategory").html("");
+	function getCategory(){
+		$.post( "/purchasedemand/searchCategory/"+$("#supplierName :selected").val(), function( data ) {
+			 $("#categoryName").html("");
 			 for(i=0; i<data.length; i++){
-				 $("#subcategory").append("<option>"+data[i].subCategoryName+"</option>");
+				 $("#categoryName").append("<option>"+data[i].categoryName+"</option>");
 			 }
+		});
+	}
+	function getSubCategory(){
+		$.post( "/purchasedemand/searchSubCategory/"+$("#categoryName :selected").val(), function( data ) {
+			 $("#subCategoryName").html("");
+			 for(i=0; i<data.length; i++){
+				 $("#subCategoryName").append("<option>"+data[i].subCategoryName+"</option>");
+			 }
+		});
+	}
+	/* get multiple dropdown onchange event */
+	function onDropdownvalueChange(){
+		$('form select').on('change', function(){
+			/* $.ajax({
+				  method: "POST",
+			      url: "/purchasedemand/getProducts",
+			      data: { supplierName: "supplierName", categoryName: "categoryName", subCategoryName: "subCategoryName"}
+			}); */
+			$.post( "/purchasedemand/getProducts/"+$("#supplierName :selected").val()+","+$("#categoryName :selected").val()+","+$("#subCategoryName :selected").val(), function( data ) {
+				 /* $("#subCategoryName").html("");
+				 for(i=0; i<data.length; i++){
+					 $("#subCategoryName").append("<option>"+data[i].subCategoryName+"</option>");
+				 } */
+			});
 		});
 	}
 	/* view image */

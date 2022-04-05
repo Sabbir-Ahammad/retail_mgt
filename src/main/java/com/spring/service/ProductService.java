@@ -107,6 +107,10 @@ public class ProductService{
     	return productDAO.getProductsBySupplier(supplierName);
     }
     
+    List<Product> getProductsByCategory(String categoryName){
+    	return productDAO.getProductsByCategory(categoryName);
+    }
+    
     Product getProductsDetails(String productName){
     	return productDAO.getProductDetails(productName);
     }

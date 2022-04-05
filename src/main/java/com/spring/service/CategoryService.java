@@ -65,5 +65,10 @@ public class CategoryService implements ICategoryService{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public Category getCategoryByName(String name) {
+		return categoryDAO.getCategoryByName(name);
+	}
 	
 }

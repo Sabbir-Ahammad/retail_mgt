@@ -100,6 +100,14 @@ public class ProductDAO implements ProductRepository{
         return productList.get(0);
 	}
 
+
+	@Override
+	public List<Product> getProductsByCategory(String categoryName) {
+		String sql = "from product where category_name = '" + categoryName + "'";
+        List<Product> products = getSession().createQuery(sql).list();
+		return products;
+	}
+
 	
 	
 }

@@ -8,16 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "purchaseOrder")
-@Table(name = "purchaseOrder")
-public class PurchaseOrder {
+@Entity(name = "purchaseDemand")
+@Table(name = "purchaseDemand")
+public class PurchaseDemand {
 
 	@Id
     @GeneratedValue
     @Column(name = "id")
     private int id;
-	@Column(name = "purchaseOrderCode")
-	private String purchaseOrderCode;
+	@Column(name = "purchaseDemandCode")
+	private String purchaseDemandCode;
 	@Column(name = "description")
 	private String description;
 	@Column(name = "lotNumber")
@@ -54,11 +54,12 @@ public class PurchaseOrder {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getPurchaseOrderCode() {
-		return purchaseOrderCode;
+	
+	public String getPurchaseDemandCode() {
+		return purchaseDemandCode;
 	}
-	public void setPurchaseOrderCode(String purchaseOrderCode) {
-		this.purchaseOrderCode = purchaseOrderCode;
+	public void setPurchaseDemandCode(String purchaseDemandCode) {
+		this.purchaseDemandCode = purchaseDemandCode;
 	}
 	public String getLotNumber() {
 		return lotNumber;

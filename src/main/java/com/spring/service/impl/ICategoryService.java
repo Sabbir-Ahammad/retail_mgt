@@ -4,5 +4,5 @@ import com.spring.common.ICommonService;
 import com.spring.model.Category;
 
 public interface ICategoryService extends ICommonService<Category>{
-
+	public Category getCategoryByName(String name);
 }
