@@ -37,8 +37,11 @@ public class PurchaseDemandService implements IPurchaseDemandService{
 	@Autowired
 	PurchaseDemandDAO purchaseDemandDAO;
 	
-	public List<Supplier> getAllSupppliers(){
-		return supplierService.getAll();
+	/*
+	 * public List<Supplier> getAllSupppliers(){ return supplierService.getAll(); }
+	 */
+	public List<Product> getAllProducts(){
+		return productService.getAll();
 	}
 	
 	public List<Product> getProductBySupplier(String supplierName){

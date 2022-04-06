@@ -1,6 +1,7 @@
 package com.spring.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -34,27 +35,44 @@ public class PurchaseDemandController implements IPurchaseDemandController{
 	@RequestMapping(value = "/create")
 	public ModelAndView create() {
 		Map data = new HashMap();
-		List<Supplier> suppliers = purchaseDemandService.getAllSupppliers();
+		/* List<Supplier> suppliers = purchaseDemandService.getAllSupppliers(); 
 		/* List<Category> category = purchaseOrderService.getCategory(); */
 		/* List<SubCategory> subCategory = purchaseOrderService.getSubCategory(); */
-		data.put("suppliers", suppliers);
+		/* data.put("suppliers", suppliers); */
+		List<Product> p =purchaseDemandService.getAllProducts();
+		Set<String> suppliers = new  LinkedHashSet<String>();
+		Set<String> cats = new  LinkedHashSet<String>();
+		Set<String> subcats = new  LinkedHashSet<String>();
+
+		for (int i = 0; i < p.size(); i++) {
+			suppliers.add(p.get(i).getSupplierName());
+			cats.add(p.get(i).getCategoryName());
+			subcats.add(p.get(i).getSubCategoryName());
+		}
+		data.put("products" ,p);
+		data.put("suppliers" ,suppliers);
+		data.put("cats" ,cats);
+		data.put("subcats" ,subcats);
 		return new ModelAndView("purchasedemand/demandproduct", "data", data);
 	}
 	
 	@RequestMapping(value = "/searchCategory/{supplierName}", method = RequestMethod.POST)
-	public List<Product> getCategoryBySupplier(HttpServletRequest request, @PathVariable("supplierName") String supplierName) {
+	public Set<String> getCategoryBySupplier(HttpServletRequest request, @PathVariable("supplierName") String supplierName) {
 		List<Product> p = purchaseDemandService.getProductBySupplier(supplierName);
-		Set set = new LinkedHashSet();
+		Set<String> cats = new  LinkedHashSet<String>();
+	
+
 		for (int i = 0; i < p.size(); i++) {
-			set.add(p.get(i).getCategoryName());
-		}
-		p.clear();
-		p.addAll(set);
-		for (int j = 0; j < p.size(); j++) {
-			System.out.println(p.get(j));
+			cats.add(p.get(i).getCategoryName());
 		}
 		
-		return p;
+		/*
+		 * Set set = new LinkedHashSet(); for (int i = 0; i < p.size(); i++) {
+		 * set.add(p.get(i).getCategoryName()); } p.clear(); p.addAll(set); for (int j =
+		 * 0; j < p.size(); j++) { System.out.println(p.get(j)); }
+		 */
+		
+		return cats;
 	}
 	
 	@RequestMapping(value = "/searchSubCategory/{categoryName}", method = RequestMethod.POST)

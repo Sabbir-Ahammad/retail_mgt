@@ -82,7 +82,7 @@
 							<label>Supplier</label>
 							<select class="form-control" id="supplierName" name="supplierName">
 								<c:forEach items="${data.suppliers}" var="s">
-						    		<option>${s.supplierName}</option>
+						    		<option>${s}</option>
 						    	</c:forEach>
 							</select>
 						</div>
@@ -91,6 +91,9 @@
 							<div class="form-group">
 							<label for="category">Category</label> 
 							<select class="form-control" id="categoryName" name="categoryName">
+							<c:forEach items="${data.cats}" var="s">
+						    		<option>${s}</option>
+						    	</c:forEach>
 							</select> 
 						</div>
 						</div>
@@ -99,6 +102,9 @@
 							<label for="subcategory">Sub-Category</label> 
 							<select class="form-control" id="subCategoryName" name="subCategoryName">
 								<!-- <option>Please select a Category</option> -->
+								<c:forEach items="${data.subcats}" var="s">
+						    		<option>${s}</option>
+						    	</c:forEach>
 							</select>
 							</div>
 						</div>
@@ -132,9 +138,9 @@
         "info":     true
     }); */
 	$(document).ready(function() {
-		getCategory();
-		getSubCategory();
-		onDropdownvalueChange();
+		//getCategory();
+		//getSubCategory();
+		//onDropdownvalueChange();
 		$("#supplierName").change(function() {
 			getCategory();
 		});
@@ -157,7 +163,7 @@
 		$.post( "/purchasedemand/searchCategory/"+$("#supplierName :selected").val(), function( data ) {
 			 $("#categoryName").html("");
 			 for(i=0; i<data.length; i++){
-				 $("#categoryName").append("<option>"+data[i].categoryName+"</option>");
+				 $("#categoryName").append("<option>"+data[i]+"</option>");
 			 }
 		});
 	}

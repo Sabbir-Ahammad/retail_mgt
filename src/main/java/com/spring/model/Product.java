@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity(name = "product")
@@ -18,6 +20,11 @@ public class Product {
     private String productCode;
     @Column(name = "productName")
     private String productName;
+    
+    @OneToOne
+    @JoinColumn(name = "c_id")
+    private Category categoryId;
+    
     @Column(name = "categoryCode")
     private String categoryCode;
     @Column(name = "categoryName")
@@ -124,6 +131,12 @@ public class Product {
 	}
 	public void setSubCategoryCode(String subCategoryCode) {
 		this.subCategoryCode = subCategoryCode;
+	}
+	public Category getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(Category categoryId) {
+		this.categoryId = categoryId;
 	}
 	
     

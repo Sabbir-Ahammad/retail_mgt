@@ -23,7 +23,7 @@
 					<label for="category">Category</label> 
 					<select class="form-control" id="category" name="category">
 						<c:forEach items="${data.categories}" var="c">
-							<option value="${c.code}">${c.code}<span>-</span>${c.name}</option>
+							<option value="${c.code}">${c.id}<span>-</span>${c.code}<span>-</span>${c.name}</option>
 						</c:forEach>
 					</select> 
 				</div>
