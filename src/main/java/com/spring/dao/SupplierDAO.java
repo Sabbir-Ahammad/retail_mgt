@@ -42,6 +42,12 @@ public class SupplierDAO implements SupplierRepository{
         List<Supplier> suppliers = getSession().createQuery(hql).list(); 
         return suppliers.get(0);
 	}
+	
+	public Supplier getSupplierByCode(String code) {
+		String hql = "from supplier where supplier_code = '" + code + "'";
+        List<Supplier> suppliers = getSession().createQuery(hql).list(); 
+        return suppliers.get(0);
+	}
 
 	public Supplier delete(int id) {
 		String hql = "delete supplier where id = '" + id + "'";

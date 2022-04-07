@@ -8,22 +8,22 @@
 		</div>
 		<form id="productAddForm" name="productAddForm" method="post"
 			action="/product/save" enctype="multipart/form-data">
-			<%-- <label for="suppliercode">Supplier</label>
+			<label for="suppliercode">Supplier</label>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<select class="form-control" id="supplier" name="supplier">
 						<c:forEach items="${data.suppliers}" var="s">
-				    		<option>${s.supplierName}</option>
+				    		<option value="${s.supplierCode}">${s.supplierName}</option>
 				    	</c:forEach>
 					</select>
 				</div>
-			</div> --%>
+			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="category">Category</label> 
 					<select class="form-control" id="category" name="category">
 						<c:forEach items="${data.categories}" var="c">
-							<option value="${c.code}">${c.id}<span>-</span>${c.code}<span>-</span>${c.name}</option>
+							<option value="${c.code}">${c.code}<span>-</span>${c.name}</option>
 						</c:forEach>
 					</select> 
 				</div>

@@ -4,5 +4,5 @@ import com.spring.common.ICommonService;
 import com.spring.model.Supplier;
 
 public interface ISupplierService extends ICommonService<Supplier>{
-
+	public Supplier getSupplierByCode(String code);
 }

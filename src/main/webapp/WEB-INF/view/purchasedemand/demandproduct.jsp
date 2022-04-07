@@ -8,7 +8,7 @@
 		</div>
 		<hr></hr>
 		<form id="purchaseOrderForm" name="purchaseOrderForm" method="post"
-			action="/purchaseorder/orderproduct" enctype="multipart/form-data">
+			action="/purchasedemand/saveProductDemand" enctype="multipart/form-data">
 			<div class="row">
 					<div class="form-group col-md-2">
 						<div class="form-group">
@@ -17,7 +17,7 @@
 						</div>
 						<div class="form-group">
 							<label for="suppliercode">Order No.</label>
-							<input class="form-control" id=purchaseOrderCode name="purchaseOrderCode"/>
+							<input class="form-control" id=purchaseOrderCode name="purchaseDemandCode"/>
 						</div>
 						<div class="form-group">
 							<label for="suppliercode">Lot number</label>
@@ -25,11 +25,12 @@
 						</div>
 						<div class="form-group">
 							<label for="productcode">Product</label> <input
-								class="form-control" id="productName" name="productName">
-						</div><div class="form-group">
+								class="form-control" id="productName" name="productName" value="">
+						</div>
+						<!-- <div class="form-group">
 							<label for="productcode">Description</label> <input
 								class="form-control" id="description" name="description">
-						</div>
+						</div> -->
 					</div>
 					<div class="form-group col-md-3">
 						<div class="form-group">
@@ -37,11 +38,11 @@
 								class="form-control" id="statedPrice" name="statedPrice">
 						</div>
 						<div class="row">
-						<div class="form-group col-md-12"><label for="productcode">Discount</label> </div>
+						<div class="form-group col-md-12"><label>Discount</label> </div>
 							<div class="form-group col-md-6">
 								<div class="form-group">
 									<input
-										class="form-control" id="discountRate" name="discountRate">
+										class="form-control" id="discountRate" name="discountRate" oninput="discountCalculate()">
 								</div>
 							</div>
 							<div class="form-group col-md-6">
@@ -52,11 +53,11 @@
 							</div>
 						</div>
 						<div class="row">
-						<div class="form-group col-md-12"><label for="productcode">Tax</label> </div>
+						<div class="form-group col-md-12"><label>Tax</label> </div>
 							<div class="form-group col-md-6">
 								<div class="form-group">
 									<input
-										class="form-control" id="taxRate" name="taxRate">
+										class="form-control" id="taxRate" name="taxRate" oninput="taxCalculate()">
 								</div>
 							</div>
 							<div class="form-group col-md-6">
@@ -110,18 +111,36 @@
 						</div>
 					</div>
 					<div class="row border p-2">
-					<c:forTokens items = "Zara,nuha,roshy" delims = "," var = "name">
+					<table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0"
+					  width="100%">
+					  <thead>
+					    <tr>
+					      <th class="th-sm">Name
+					      </th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  <c:forEach items="${data.products}" var="p">
+					    <tr>
+					      <td class="nr">${p.productName}</td>
+					    </tr>
+					   </c:forEach>
+					  </tbody>
+					</table>
+					<%-- <c:forEach items="${data.products}" var="p">
 						<div class="form-group col-md-2">
-						<span role="button" tabindex="0">
+						<span role="button" tabindex="0" class="a">
+						<!-- <a href=""> -->
 							<div class="card mb-3">
 							  <img src="/resources/image/flag_bangladesh.jpg" class="card-img-top" alt="...">
 							  <div class="card-text">
-							    <p class="card-title">Card title</p>
+							    <p class="card-title">${p.productName}</p>
 							  </div>
 							</div>
+						<!-- </a> -->
 						</span>
 						</div>
-				    </c:forTokens>
+				    </c:forEach> --%>
 					</div>
 				</div>
 			</div>
@@ -131,16 +150,49 @@
 </div>
 <jsp:include page="/WEB-INF/view/common/footer.jsp" />
 <script type="text/javascript">
-
 	/* $('#proTable').DataTable( {
         "paging":   true,
         "ordering": true,
         "info":     true
     }); */
 	$(document).ready(function() {
+		$('#dtDynamicVerticalScrollExample').DataTable({
+		    "scrollY": "50vh",
+		    "scrollCollapse": true,
+		  });
+		  $('.dataTables_length').addClass('bs-select');
+		  
+		  /* $("#dtDynamicVerticalScrollExample tr").click(function() {
+			    alert('values: ' + this.innerText);
+			}); */
+		  
+			/* $(".use-address").click(function() {
+			    var $row = $(this).closest("tr");    // Find the row
+			    var $text = $row.find(".nr").text(); // Find the text
+			    
+			    // Let's test it out
+			    alert($text);
+			}); */
+			/* get the product from table */
+			
+			var ppp;
+			[].slice.call (document.querySelectorAll("#dtDynamicVerticalScrollExample tr"), 1).forEach(function(row){
+			      row.addEventListener("click", function(){
+			           var ths = document.querySelectorAll("#dtDynamicVerticalScrollExample th");
+			           var obj = [].reduce.call(ths, function(obj, th, i){
+			               obj[th.textContent] = row.cells[i].textContent;
+			               ppp =row.cells[i].textContent;
+			               document.getElementById("productName").value = ppp;
+			               return row.cells[i].textContent;
+			           }, {});
+			           /* console.log(obj); */
+			       }); 
+			});
+			
+			
 		//getCategory();
 		//getSubCategory();
-		//onDropdownvalueChange();
+		onDropdownvalueChange();
 		$("#supplierName").change(function() {
 			getCategory();
 		});
@@ -157,6 +209,24 @@
         d.getFullYear();
     
     $('#orderDate').val(date);
+    
+    var minusDiscount;
+    var plusTax;
+    function discountCalculate(){
+    	var dis = $('#discountRate').val()* $('#statedPrice').val();
+    	$('#discount').val(dis);
+    }
+    
+    function taxCalculate(){
+    	var sta = $('#statedPrice').val();
+        var disc = $('#discount').val();
+        minusDiscount = sta - disc;
+        console.log(minusDiscount)
+    	
+    	var vat = $('#taxRate').val()* minusDiscount;
+    	$('#tax').val(vat);
+    }
+    
     
 	/* load product */
 	function getCategory(){

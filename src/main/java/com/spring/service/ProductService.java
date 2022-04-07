@@ -59,13 +59,15 @@ public class ProductService{
 		String sCode = request.getParameter("subcategory");
 		String cName = categoryService.getCategoryByCode(cCode).getName();
 		String scName = subCategoryService.getSubCategoryByCode(sCode).getSubCategoryName();
+		String supName = supplierService.getSupplierByCode(request.getParameter("supplier")).getSupplierName();
         p.setCategoryCode(cCode);
+        p.setCategoryName(cName);
         p.setSubCategoryCode(sCode);
+        p.setSubCategoryName(scName);
         p.setProductCode(request.getParameter("productCode"));
         p.setProductName(request.getParameter("productName"));
-        p.setCategoryName(cName);
-        p.setSubCategoryName(request.getParameter("subcategory"));
-        p.setSupplierName(request.getParameter("supplier"));
+        p.setSupplierCode(request.getParameter("supplier"));
+        p.setSupplierName(supName);
         p.setProductImage(file.getOriginalFilename());
         upload(file);
         return productDAO.save(p);

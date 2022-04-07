@@ -24,8 +24,8 @@ public class PurchaseDemandDAO implements PurchaseDemandRepository{
 
 	@Override
 	public PurchaseDemand save(PurchaseDemand t) {
-		
 		getSession().save(t);
+    	getSession().flush();
 		return null;
 	}
 

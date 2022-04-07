@@ -1,5 +1,6 @@
 package com.spring.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -60,8 +61,6 @@ public class PurchaseDemandController implements IPurchaseDemandController{
 	public Set<String> getCategoryBySupplier(HttpServletRequest request, @PathVariable("supplierName") String supplierName) {
 		List<Product> p = purchaseDemandService.getProductBySupplier(supplierName);
 		Set<String> cats = new  LinkedHashSet<String>();
-	
-
 		for (int i = 0; i < p.size(); i++) {
 			cats.add(p.get(i).getCategoryName());
 		}
@@ -83,13 +82,19 @@ public class PurchaseDemandController implements IPurchaseDemandController{
 	
 	@RequestMapping(value = "/getProducts/{data}", method = RequestMethod.POST)
 	public List<Product> getProducts(HttpServletRequest request, @PathVariable("data") String data) {
-		purchaseDemandService.getProductsOnMultipleCriteria(data);
+		//purchaseDemandService.getProductsOnMultipleCriteria(data);
+		List<String> elephantList = Arrays.asList(data.split(","));
+		/*
+		 * for (int i = 0; i < elephantList.size(); i++) {
+		 * System.out.println(elephantList.get(i)); }
+		 */
 		return null;
 	}
 
 	@Override
+	@RequestMapping(value = "/saveProductDemand", method = RequestMethod.POST)
 	public ModelAndView save(HttpServletRequest request) {
-		// TODO Auto-generated method stub
+		purchaseDemandService.save(request);
 		return null;
 	}
 

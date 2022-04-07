@@ -33,6 +33,8 @@ public class Product {
     private String subCategoryCode;
     @Column(name = "subCategoryName")
     private String subCategoryName;
+    @Column(name = "supplierCode")
+    private String supplierCode;
     @Column(name = "supplierName")
     private String supplierName;
     @Column(name = "productImage")
@@ -137,6 +139,12 @@ public class Product {
 	}
 	public void setCategoryId(Category categoryId) {
 		this.categoryId = categoryId;
+	}
+	public String getSupplierCode() {
+		return supplierCode;
+	}
+	public void setSupplierCode(String supplierCode) {
+		this.supplierCode = supplierCode;
 	}
 	
     

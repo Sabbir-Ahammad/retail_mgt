@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -57,17 +59,34 @@ public class PurchaseDemandService implements IPurchaseDemandService{
 	}
 	@Override
 	public PurchaseDemand save(HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		//string to date
-		String dateString = "2011-09-09";
+		String dateString = request.getParameter("orderDate");
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date todayDate = null;
 		try {
-			Date myDate = formatter.parse(dateString);
+			 todayDate = formatter.parse(dateString);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		
+		PurchaseDemand pd = new PurchaseDemand();
+		pd.setOrderDate(todayDate);
+		pd.setPurchaseDemandCode(request.getParameter("purchaseDemandCode"));
+		pd.setLotNumber(request.getParameter("lotNumber"));
+		pd.setProductName(request.getParameter("productName"));
+		pd.setStatedPrice(Double.valueOf(request.getParameter("statedPrice")));
+		pd.setDiscountRate(Double.valueOf(request.getParameter("discountRate")));
+		pd.setDiscount(Double.valueOf(request.getParameter("discount")));
+		pd.setTaxRate(Double.valueOf(request.getParameter("taxRate")));
+		pd.setTax(Double.valueOf(request.getParameter("tax")));
+		pd.setQuantity(Integer.valueOf(request.getParameter("quantity")));
+		pd.setPurchasePrice(Double.valueOf(request.getParameter("purchasePrice")));
+		pd.setSupplierName(request.getParameter("supplierName"));
+		pd.setCategoryName(request.getParameter("categoryName"));
+		pd.setSubCategoryName(request.getParameter("subCategoryName"));
+		pd.setStatus("Demanded");
+		return purchaseDemandDAO.save(pd);
 	}
 
 	@Override

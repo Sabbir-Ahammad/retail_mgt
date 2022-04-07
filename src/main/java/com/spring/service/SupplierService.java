@@ -67,4 +67,9 @@ public class SupplierService implements ISupplierService {
 		return true;
 	}
 
+	@Override
+	public Supplier getSupplierByCode(String code) {
+		return supplierDAO.getSupplierByCode(code);
+	}
+
 }
