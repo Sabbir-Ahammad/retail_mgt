@@ -3,29 +3,32 @@
 <jsp:include page="/WEB-INF/view/product/common.jsp" />
 
 <div class="text-center mt-4 mb-4"><h4>Products</h4></div>
-<table id="proTable" class="table table-striped table-hover" style="width:100%">
+<table id="purchaseDemandTable" class="table table-striped table-hover" style="width:100%">
          <thead>
             <tr>
-                <th>Product Code</th>
-                <th>Product name</th>
-                <th>Category</th>
-                <th>Sub-Category</th>
-                <th>Supplier</th>
-                <th>Action</th>
+            <th>purchaseDemandCode</th>
+            <th>lotNumber</th>
+            <th>productName</th>
+            <th>quantity</th>
+            <th>purchasePrice</th>
+            <th>supplierName</th>
+            <th>categoryName</th>
+            <th>status</th>
+            <th>orderDate</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach items="${products}" var="p">
                 <tr>
-                    <td>${p.productCode}</td>
+	                <td>${p.purchaseDemandCode}</td>
+	                <td>${p.lotNumber}</td>
                     <td>${p.productName}</td>
-                    <td>${p.categoryName}</td>
-                    <td>${p.subCategoryName}</td>
+                    <td>${p.quantity}</td>
+                    <td>${p.purchasePrice}</td>
                     <td>${p.supplierName}</td>
-                    <td>
-                        <a class="btn btn-primary" role="button" href="/product/edit/${p.id}">Edit</a>
-                        <a class="btn btn-primary" role="button" href="/product/delete/${p.id}">Delete</a>
-                    </td>
+                    <td>${p.status}</td>
+                    <td>${p.productName}</td>
+                    <td>${p.orderDate}</td>
                 </tr>
             </c:forEach>
         </tbody>

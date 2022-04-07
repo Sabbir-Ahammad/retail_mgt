@@ -69,11 +69,11 @@
 						</div>
 						<div class="form-group">
 							<label for="productname">Purchase Amount</label> <input
-								class="form-control" id="quantity" name="quantity">
+								class="form-control" id="quantity" name="quantity" oninput="chargedPriceCalculate()">
 						</div>
 						<div class="form-group">
 							<label for="productname">Charged Price</label> <input
-								class="form-control" id="purchasePrice" name="purchasePrice">
+								class="form-control" id="purchasePrice" name="purchasePrice" readonly>
 						</div>
 					</div>
 					<div class="form-group col-md-7">
@@ -212,20 +212,28 @@
     
     var minusDiscount;
     var plusTax;
+    var chargedPrice;
     function discountCalculate(){
     	var dis = $('#discountRate').val()* $('#statedPrice').val();
     	$('#discount').val(dis);
-    }
-    
-    function taxCalculate(){
+    	
     	var sta = $('#statedPrice').val();
         var disc = $('#discount').val();
         minusDiscount = sta - disc;
-        console.log(minusDiscount)
-    	
-    	var vat = $('#taxRate').val()* minusDiscount;
-    	$('#tax').val(vat);
     }
+    
+    function taxCalculate(){
+    	var tax = $('#taxRate').val()* minusDiscount;
+    	$('#tax').val(tax);
+    	plusTax = minusDiscount + tax;
+    	console.log(plusTax);
+    }
+    
+    function chargedPriceCalculate(){
+    	chargedPrice = $('#quantity').val() * plusTax;
+    	$('#purchasePrice').val(chargedPrice);
+    }
+    
     
     
 	/* load product */

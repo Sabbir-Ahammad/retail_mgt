@@ -31,8 +31,9 @@ public class PurchaseDemandDAO implements PurchaseDemandRepository{
 
 	@Override
 	public List<PurchaseDemand> getAll() {
-		
-		return null;
+		String sql = "from purchase_demand";
+		List<PurchaseDemand> demands = getSession().createQuery(sql).list();
+		return demands;
 	}
 
 	@Override

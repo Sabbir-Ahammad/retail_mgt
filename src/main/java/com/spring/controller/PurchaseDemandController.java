@@ -1,6 +1,7 @@
 package com.spring.controller;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -118,7 +119,7 @@ public class PurchaseDemandController implements IPurchaseDemandController{
 
 	@Override
 	public ModelAndView getAll() {
-		// TODO Auto-generated method stub
+		purchaseDemandService.getAll();
 		return null;
 	}
 

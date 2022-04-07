@@ -3,7 +3,7 @@ package com.spring.service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -60,18 +60,17 @@ public class PurchaseDemandService implements IPurchaseDemandService{
 	@Override
 	public PurchaseDemand save(HttpServletRequest request) {
 		//string to date
-		String dateString = request.getParameter("orderDate");
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		Date todayDate = null;
-		try {
-			 todayDate = formatter.parse(dateString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		/*
+		 * String dateString = request.getParameter("orderDate"); DateFormat formatter =
+		 * new SimpleDateFormat("dd-MM-yyyy"); Date todayDate = null; try { todayDate =
+		 * formatter.format(dateString); } catch (ParseException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
+		//System.out.println(todayDate);
+		Date date = new Date(System.currentTimeMillis());
+		//java.time.LocalDate.now();
 		PurchaseDemand pd = new PurchaseDemand();
-		pd.setOrderDate(todayDate);
+		pd.setOrderDate(date);
 		pd.setPurchaseDemandCode(request.getParameter("purchaseDemandCode"));
 		pd.setLotNumber(request.getParameter("lotNumber"));
 		pd.setProductName(request.getParameter("productName"));
@@ -103,8 +102,8 @@ public class PurchaseDemandService implements IPurchaseDemandService{
 
 	@Override
 	public List getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return purchaseDemandDAO.getAll();
+		
 	}
 
 	@Override
