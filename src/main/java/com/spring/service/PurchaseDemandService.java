@@ -35,6 +35,8 @@ public class PurchaseDemandService implements IPurchaseDemandService{
 	SubCategoryService subcategoryService;
 	@Autowired
 	ProductService productService;
+	@Autowired
+	InventoryService inventoryService;
 	
 	@Autowired
 	PurchaseDemandDAO purchaseDemandDAO;
@@ -73,6 +75,7 @@ public class PurchaseDemandService implements IPurchaseDemandService{
 		pd.setOrderDate(date);
 		pd.setPurchaseDemandCode(request.getParameter("purchaseDemandCode"));
 		pd.setLotNumber(request.getParameter("lotNumber"));
+		pd.setProductCode(request.getParameter("productCode"));
 		pd.setProductName(request.getParameter("productName"));
 		pd.setStatedPrice(Double.valueOf(request.getParameter("statedPrice")));
 		pd.setDiscountRate(Double.valueOf(request.getParameter("discountRate")));
@@ -130,6 +133,20 @@ public class PurchaseDemandService implements IPurchaseDemandService{
 			System.out.println(stringPart[i]);
 		}
 		return null;
+	}
+
+	@Override
+	public PurchaseDemand updateStatus(PurchaseDemand p) {
+		Date date = new Date(System.currentTimeMillis());
+		p.setReceivedDate(date);
+		PurchaseDemand pp = purchaseDemandDAO.updateStatus(p);
+		PurchaseDemand pd = purchaseDemandDAO.getByID(p.getId());
+		inventoryService.save(pd);
+		return p;
+	}
+	
+	public List<PurchaseDemand> getAllReceived(){
+		return purchaseDemandDAO.getAllReceived();
 	}
 
 }

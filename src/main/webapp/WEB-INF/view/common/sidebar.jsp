@@ -40,7 +40,8 @@
 						<a class="collapse-item" href="/subcategory/view">Sub-Category</a>
 						<a class="collapse-item" href="/product/create">Products</a>
 						<a class="collapse-item" href="/pricing/view">Products pricing</a>
-						<a class="collapse-item" href="/purchasedemand/create">Purchase Products</a>
+						<a class="collapse-item" href="/purchasedemand/demandlist">Purchase Demands</a>
+						<a class="collapse-item" href="/purchasedProduct/purchasedproductlist">Purchase Products</a>
 					</div>
 				</div>
 			</li>
@@ -65,7 +66,7 @@
 			<li class="nav-item"><a class="nav-link" href="charts.html">
 					<i class="fas fa-fw fa-chart-area"></i> <span>POS</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="charts.html">
+			<li class="nav-item"><a class="nav-link" href="/inventory/showinventory">
 					<i class="fas fa-fw fa-chart-area"></i> <span>Inventory</span>
 			</a></li>
 			<!-- Nav Item - POS -->

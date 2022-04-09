@@ -96,7 +96,7 @@ public class PurchaseDemandController implements IPurchaseDemandController{
 	@RequestMapping(value = "/saveProductDemand", method = RequestMethod.POST)
 	public ModelAndView save(HttpServletRequest request) {
 		purchaseDemandService.save(request);
-		return null;
+		return new ModelAndView("redirect:/purchasedemand/demandlist");
 	}
 
 	@Override
@@ -118,16 +118,27 @@ public class PurchaseDemandController implements IPurchaseDemandController{
 	}
 
 	@Override
+	@RequestMapping(value = "/demandlist", method = RequestMethod.GET)
 	public ModelAndView getAll() {
-		purchaseDemandService.getAll();
-		return null;
+		List<PurchaseDemand> purchasedemands = purchaseDemandService.getAll();
+		return new ModelAndView("/purchasedemand/purchasedemandslist", "pd", purchasedemands);
 	}
 
 	@Override
 	@RequestMapping(value = "/save")
 	public ModelAndView save(@ModelAttribute PurchaseDemand p) {
-		purchaseDemandService.save(p);
+		
 		return new ModelAndView("/purchasedemand/create");
 	}
+
+	@Override
+	@RequestMapping(value = "/updatestatus/{id}")
+	public ModelAndView updateStatus(PurchaseDemand p) {
+		purchaseDemandService.updateStatus(p);
+		List<PurchaseDemand> purchasedemands = purchaseDemandService.getAll();
+		return new ModelAndView("redirect:/purchasedemand/demandlist", "pd", purchasedemands);
+	}
+	
+	
 
 }

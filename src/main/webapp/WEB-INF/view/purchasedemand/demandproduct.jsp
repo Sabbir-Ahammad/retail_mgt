@@ -1,5 +1,5 @@
 <jsp:include page="/WEB-INF/view/common/header.jsp" />
-<jsp:include page="/WEB-INF/view/product/common.jsp" />
+<jsp:include page="/WEB-INF/view/purchasedemand/common.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
 	<div class="border m-2 p-1">
@@ -24,6 +24,7 @@
 							<input class="form-control" id="lotNumber" name="lotNumber"/>
 						</div>
 						<div class="form-group">
+						<input class="form-control" id="productCode" name="productCode" value="" type="hidden">
 							<label for="productcode">Product</label> <input
 								class="form-control" id="productName" name="productName" value="">
 						</div>
@@ -111,12 +112,11 @@
 						</div>
 					</div>
 					<div class="row border p-2">
-					<table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0"
-					  width="100%">
+					<%-- <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" style="width: 100%">
+					  <!-- width="100%" cellspacing="0" -->
 					  <thead>
 					    <tr>
-					      <th class="th-sm">Name
-					      </th>
+					      <th class="th-sm">Name</th>
 					    </tr>
 					  </thead>
 					  <tbody>
@@ -126,21 +126,21 @@
 					    </tr>
 					   </c:forEach>
 					  </tbody>
-					</table>
-					<%-- <c:forEach items="${data.products}" var="p">
-						<div class="form-group col-md-2">
+					</table> --%>
+					<c:forEach items="${data.products}" var="p">
+						<div class="form-group col-md-2 res">
 						<span role="button" tabindex="0" class="a">
-						<!-- <a href=""> -->
-							<div class="card mb-3">
-							  <img src="/resources/image/flag_bangladesh.jpg" class="card-img-top" alt="...">
+						<a id="${p.productName}" title="${p.productCode}">
+							<div class="card mb-3" pes>
+							  <img src="/resources/image/${p.productImage}" class="card-img-top" alt="...">
 							  <div class="card-text">
 							    <p class="card-title">${p.productName}</p>
 							  </div>
 							</div>
-						<!-- </a> -->
-						</span>
+						</span> 
+						</a>
 						</div>
-				    </c:forEach> --%>
+				    </c:forEach>
 					</div>
 				</div>
 			</div>
@@ -156,11 +156,33 @@
         "info":     true
     }); */
 	$(document).ready(function() {
-		$('#dtDynamicVerticalScrollExample').DataTable({
+		//get div value
+		/* $(document.body).on('click','div',function(evt){
+			  var currentID = this.id || "No ID!";
+			  $(this).html(currentID);
+			}) */
+		
+		//get ancor <a> tag value
+		$(function(){
+			  $('div.res a').click(function(){
+			    var i = ($(this).attr('title'));
+			    $("#productCode").val(i);
+			    // or alert($(this).hash();
+			  });
+			});
+			$(function(){
+				  $('div.res a').click(function(){
+				    var i = ($(this).attr('id'));
+				    $("#productName").val(i);
+				    // or alert($(this).hash();
+				  });
+				});
+		
+		/* $('#dtDynamicVerticalScrollExample').DataTable({
 		    "scrollY": "50vh",
 		    "scrollCollapse": true,
 		  });
-		  $('.dataTables_length').addClass('bs-select');
+		  $('.dataTables_length').addClass('bs-select'); */
 		  
 		  /* $("#dtDynamicVerticalScrollExample tr").click(function() {
 			    alert('values: ' + this.innerText);
@@ -173,9 +195,9 @@
 			    // Let's test it out
 			    alert($text);
 			}); */
-			/* get the product from table */
 			
-			var ppp;
+			/* get the product from table */
+			/* var ppp;
 			[].slice.call (document.querySelectorAll("#dtDynamicVerticalScrollExample tr"), 1).forEach(function(row){
 			      row.addEventListener("click", function(){
 			           var ths = document.querySelectorAll("#dtDynamicVerticalScrollExample th");
@@ -185,9 +207,9 @@
 			               document.getElementById("productName").value = ppp;
 			               return row.cells[i].textContent;
 			           }, {});
-			           /* console.log(obj); */
+			           console.log(obj); 
 			       }); 
-			});
+			}); */
 			
 			
 		//getCategory();

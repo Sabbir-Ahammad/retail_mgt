@@ -22,6 +22,8 @@ public class PurchaseDemand {
 	private String description;
 	@Column(name = "lotNumber")
 	private String lotNumber;
+	@Column(name = "productCode")
+	private String productCode;
 	@Column(name = "productName")
 	private String productName;
 	@Column(name = "statedPrice")
@@ -48,6 +50,8 @@ public class PurchaseDemand {
 	private String status;
 	@Column(name = "orderDate")
 	private Date orderDate;
+	@Column(name = "receivedDate")
+	private Date receivedDate;
 	public int getId() {
 		return id;
 	}
@@ -150,6 +154,18 @@ public class PurchaseDemand {
 	}
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
+	}
+	public Date getReceivedDate() {
+		return receivedDate;
+	}
+	public void setReceivedDate(Date receivedDate) {
+		this.receivedDate = receivedDate;
+	}
+	public String getProductCode() {
+		return productCode;
+	}
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
 	}
 	
 }

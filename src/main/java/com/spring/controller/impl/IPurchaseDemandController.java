@@ -7,4 +7,5 @@ import com.spring.model.PurchaseDemand;
 
 public interface IPurchaseDemandController extends ICommonController{
 	public ModelAndView save(PurchaseDemand p);
+	public ModelAndView updateStatus(PurchaseDemand p);
 }
