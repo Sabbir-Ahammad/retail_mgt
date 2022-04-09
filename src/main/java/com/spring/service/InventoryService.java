@@ -67,10 +67,11 @@ public class InventoryService implements IInventoryService{
 		try {
 			 Inventory i = inventoryDAO.getByProductCode(p.getProductCode());
 			 System.out.println(i.getAverageDiscount() + " " + i.getAveragePrice() + " " + i.getAverageTax() + " " + i.getStoredAmount());
-			 idis = i.getAverageDiscount() + (pdis/ psa);
-			 iap = i.getAveragePrice() + (pap/ psa);
-			 iat = i.getAverageTax() + (pat/ psa);
 			 isa = i.getStoredAmount() + psa;
+			 idis = ((i.getAverageDiscount() * i.getStoredAmount()) + pdis)/ isa;
+			 iap = ((i.getAveragePrice() * i.getStoredAmount()) + pap)/isa;
+			 iat = ((i.getAverageTax() * i.getStoredAmount()) + pat)/isa;
+			 //isa = i.getStoredAmount() + psa;
 			 i.setAverageDiscount(idis);
 			 i.setAveragePrice(iap);
 			 i.setAverageTax(iat);

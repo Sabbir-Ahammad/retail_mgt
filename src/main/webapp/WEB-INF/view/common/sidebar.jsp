@@ -63,7 +63,7 @@
 			</li>
 			
 			<!-- Nav Item - POS -->
-			<li class="nav-item"><a class="nav-link" href="charts.html">
+			<li class="nav-item"><a class="nav-link" href="/posController/posView">
 					<i class="fas fa-fw fa-chart-area"></i> <span>POS</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/inventory/showinventory">

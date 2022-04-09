@@ -6,33 +6,23 @@
 <table id="purchaseDemandTable" class="table table-striped table-hover" style="width:100%">
          <thead>
             <tr>
-	            <th>Demand Code</th>
-	            <th>Lot Number</th>
+	            <th>ID</th>
 	            <th>Product Name</th>
-	            <th>Quantity</th>
-	            <th>Price</th>
-	            <th>Supplier Name</th>
 	            <th>Category Name</th>
-	            <th>Status</th>
-	            <th>Order Date</th>
-	            <th>Update Status</th>
+	            <th>Sub-Category Name</th>
+	            <th>Received Date</th>
+	            <th>Supplier Name</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach items="${in}" var="i">
                 <tr>
-	                <td>${p.purchaseDemandCode}</td>
-	                <td>${p.lotNumber}</td>
-                    <td>${p.productName}</td>
-                    <td>${p.quantity}</td>
-                    <td>${p.purchasePrice}</td>
-                    <td>${p.supplierName}</td>
-                    <td>${p.categoryName}</td>
-                    <td>${p.status}</td>
-                    <td>${p.orderDate}</td>
-                    <td>
-                    	<a class="btn btn-primary" role="button" href="/purchasedemand/updatestatus/${p.id}">Received</a>                    
-                    </td>
+	                <td>${i.id}</td>
+	                <td>${i.productName}</td>
+	                <td>${i.categoryName}</td>
+	                <td>${i.subcategoryName}</td>
+	                <td>${i.receivedDate}</td>
+	                <td>${i.supplierName}</td>
                 </tr>
             </c:forEach>
         </tbody>
