@@ -8,7 +8,7 @@
 		</div>
 		<hr></hr>
 		<form id="purchaseOrderForm" name="purchaseOrderForm" method="post"
-			action="/purchasedemand/saveProductDemand" enctype="multipart/form-data">
+			action="/posController/posSave">
 			<div class="row">
 					<div class="form-group col-md-6">
 						
@@ -36,6 +36,7 @@
 					            <th>Product Name</th>
 					            <th>Quantity</th>
 					            <th>Price</th>
+					             <th>Action</th>
 					        </tr>
 					    </thead>
 					    <tbody id="insertionPoint">
@@ -91,16 +92,18 @@
         var telephone;
     	/* $(function(){ */
 			  $('div.res a').click(function(){
-			     var j = ($(this).attr('title'));
-			     i =j;
+			      i = ($(this).attr('title'));
+			     
 			     //console.log(i);
 			    //$("#productCode").val(i);
 			  });
 			/* }); */
     	console.log(i);
+			
+			
     	$.post( "/posController/productDetail/"+i, function( data ) {
     		document.getElementById("insertionPoint").innerHTML += "<tr><td>" + data.productName + "</td><td>" + 
-    		data.productName + "</td><td>" + data.productName + "</td></tr>";
+    		data.productName + "</td><td>" + data.productName + "</td><td><input type='hidden' name='product_name[]' value='"+ data.productName+"'/></td></tr>";
 		});
         
     }	

@@ -1,6 +1,8 @@
 package com.spring.controller;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,8 +33,13 @@ public class POSController implements IPOSController{
 	}
 
 	@Override
+	@RequestMapping(value = "/posSave")
 	public ModelAndView save(HttpServletRequest request) {
-		// TODO Auto-generated method stub
+		//System.out.println(request.getParameter("product_name[]"));
+		Map<String, String[]> map = request.getParameterMap();
+		for (int i = 0; i < map.get("product_name[]").length; i++) {
+			System.out.println(map.get("product_name[]")[i]);
+		}
 		return null;
 	}
 

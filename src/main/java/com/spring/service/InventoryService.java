@@ -17,6 +17,8 @@ public class InventoryService implements IInventoryService{
 	
 	@Autowired
 	InventoryDAO inventoryDAO;
+	@Autowired
+	ProductService productService;
 
 	@Override
 	public Inventory save(HttpServletRequest request) {
@@ -47,6 +49,7 @@ public class InventoryService implements IInventoryService{
 	}
 
 	public Inventory save(PurchaseDemand p) {
+		Product product = productService.getProductDetailsByCode(p.getProductCode());
 		Inventory in = new Inventory();
 		in.setProductName(p.getProductName());
 		in.setProductCode(p.getProductCode());
@@ -64,6 +67,8 @@ public class InventoryService implements IInventoryService{
 		Integer psa = p.getQuantity();
 		Double idis = null,iap  = null,iat  = null;
 		Integer isa = null;
+		Double taxRate = product.getTaxRate(), discount=product.getDiscount(), profitMargin=product.getProfitMargin();
+		Double taxedPrice = null, discountedPrice=null, profit=null, sellingPrice=null;
 		try {
 			 Inventory i = inventoryDAO.getByProductCode(p.getProductCode());
 			 System.out.println(i.getAverageDiscount() + " " + i.getAveragePrice() + " " + i.getAverageTax() + " " + i.getStoredAmount());
@@ -75,7 +80,7 @@ public class InventoryService implements IInventoryService{
 			 i.setAveragePrice(iap);
 			 i.setAverageTax(iat);
 			 i.setStoredAmount(isa);
-			 System.out.println(idis +" " +iap + " " + iat +" "+isa);
+			 discountedPrice = iap - (iap * taxRate);
 			 return inventoryDAO.update(i);
 		} catch (Exception e) {
 			idis = (pdis/ psa);
