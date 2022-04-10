@@ -56,7 +56,7 @@ public class InventoryService implements IInventoryService{
 		in.setSubcategoryName(p.getSubCategoryName());
 		in.setSupplierName(p.getSupplierName());
 		in.setLotNumber(p.getLotNumber());
-		
+		in.setProductImage(p.getProductImage());
 		
 		Double pdis = p.getDiscount();
 		Double pap = p.getPurchasePrice();
@@ -71,7 +71,6 @@ public class InventoryService implements IInventoryService{
 			 idis = ((i.getAverageDiscount() * i.getStoredAmount()) + pdis)/ isa;
 			 iap = ((i.getAveragePrice() * i.getStoredAmount()) + pap)/isa;
 			 iat = ((i.getAverageTax() * i.getStoredAmount()) + pat)/isa;
-			 //isa = i.getStoredAmount() + psa;
 			 i.setAverageDiscount(idis);
 			 i.setAveragePrice(iap);
 			 i.setAverageTax(iat);
@@ -92,4 +91,7 @@ public class InventoryService implements IInventoryService{
 
 	}
 	
+	Inventory getProductsDetails(String productCode){
+    	return inventoryDAO.getByProductCode(productCode);
+    }
 }

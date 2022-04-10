@@ -23,15 +23,14 @@
 						<div class="form-group">
 							<label for="suppliercode">Customer</label><br>
 							<label for="suppliercode">MR. A</label>
+							<div class="float-right">
+								<button class="btn btn-light">Add Customer</button>
+							</div>
 						</div>
-						<!-- <table id="sellProductTable" class="table table-striped table-bordered table-sm" style="width: 100%"> -->
-					  <table id="t1">
-					    <caption>Customer Table</caption>
-					    <colgroup>
-					        <col span="2" class="c2">
-					        <col>
-					        <col class="c1">
-					    </colgroup>
+						<hr>
+						<!-- <table id="sellProductTable"  style="width: 100%"> -->
+					<div style="height: 250px; overflow-y: scroll">
+					  <table id="sellProductTable" class="table table-striped table-bordered table-sm">
 					    <thead>
 					        <tr>
 					            <th>Product Name</th>
@@ -43,6 +42,7 @@
 					      
 					    </tbody>
 					</table>
+				</div>
 					
 					</div>
 					<div class="form-group col-md-6">
@@ -54,13 +54,13 @@
 							  </span>
 							</div>
 					</div>
-					<div class="row border p-2">
+					<div class="row border p-2" style="height: 350px; overflow-y: scroll">
 					<c:forEach items="${products}" var="p">
 						<div class="form-group col-md-2 res">
-						<span role="button" tabindex="0" class="a">
+						<span role="button" tabindex="0" class="a" onclick="insertData()">
 						<a id="${p.productName}" title="${p.productCode}">
-							<div class="card mb-3">
-							  <img src="/resources/image/${p.productImage}" class="card-img-top" alt="...">
+							<div class="card mb-3" >
+							  <img src="/resources/image/${p.productImage}" class="card-img-top" alt="..." >
 							  <div class="card-text">
 							    <p class="card-title">${p.productName}</p>
 							  </div>
@@ -83,68 +83,29 @@
         "ordering": true,
         "info":     true
     }); */
+    var i;
+    function insertData() {
+    	
+    	var name;
+        var address;
+        var telephone;
+    	/* $(function(){ */
+			  $('div.res a').click(function(){
+			     var j = ($(this).attr('title'));
+			     i =j;
+			     //console.log(i);
+			    //$("#productCode").val(i);
+			  });
+			/* }); */
+    	console.log(i);
+    	$.post( "/posController/productDetail/"+i, function( data ) {
+    		document.getElementById("insertionPoint").innerHTML += "<tr><td>" + data.productName + "</td><td>" + 
+    		data.productName + "</td><td>" + data.productName + "</td></tr>";
+		});
+        
+    }	
+    
 	$(document).ready(function() {
-		
-		// Find a <table> element with id="myTable":
-		var table = document.getElementById("sellProductTable");
-		// Create an empty <tr> element and add it to the 1st position of the table:
-		var row = table.insertRow(0);
-		// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-		var cell1 = row.insertCell(0);
-		var cell2 = row.insertCell(1);
-
-		// Add some text to the new cells:
-		cell1.innerHTML = "NEW CELL1";
-		cell2.innerHTML = "NEW CELL2";
-		//get ancor <a> tag value
-			function insertData() {
-		        var name = document.getElementById("inputCustomerName").value;
-		        var address = document.getElementById("inputCustomerAddress").value;
-		        var telephone = document.getElementById("inputCustomerTelephone").value;
-		        document.getElementById("insertionPoint").innerHTML += "<tr><td>" + name + "</td><td>" + address + "</td><td>" + telephone + "</td></tr>";
-		      
-		        // The below part is to clear the values after the entry is added.
-		        document.getElementById("inputCustomerName").value = "";
-		        document.getElementById("inputCustomerAddress").value = "";
-		        document.getElementById("inputCustomerTelephone").value = "";
-		    }
-		
-		/* $('#dtDynamicVerticalScrollExample').DataTable({
-		    "scrollY": "50vh",
-		    "scrollCollapse": true,
-		  });
-		  $('.dataTables_length').addClass('bs-select'); */
-		  
-		  /* $("#dtDynamicVerticalScrollExample tr").click(function() {
-			    alert('values: ' + this.innerText);
-			}); */
-		  
-			/* $(".use-address").click(function() {
-			    var $row = $(this).closest("tr");    // Find the row
-			    var $text = $row.find(".nr").text(); // Find the text
-			    
-			    // Let's test it out
-			    alert($text);
-			}); */
-			
-			/* get the product from table */
-			/* var ppp;
-			[].slice.call (document.querySelectorAll("#dtDynamicVerticalScrollExample tr"), 1).forEach(function(row){
-			      row.addEventListener("click", function(){
-			           var ths = document.querySelectorAll("#dtDynamicVerticalScrollExample th");
-			           var obj = [].reduce.call(ths, function(obj, th, i){
-			               obj[th.textContent] = row.cells[i].textContent;
-			               ppp =row.cells[i].textContent;
-			               document.getElementById("productName").value = ppp;
-			               return row.cells[i].textContent;
-			           }, {});
-			           console.log(obj); 
-			       }); 
-			}); */
-			
-			
-		//getCategory();
-		//getSubCategory();
 		onDropdownvalueChange();
 		$("#supplierName").change(function() {
 			getCategory();

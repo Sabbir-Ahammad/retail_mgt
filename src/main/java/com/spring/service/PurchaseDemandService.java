@@ -68,7 +68,7 @@ public class PurchaseDemandService implements IPurchaseDemandService{
 		 * formatter.format(dateString); } catch (ParseException e) { // TODO
 		 * Auto-generated catch block e.printStackTrace(); }
 		 */
-		//System.out.println(todayDate);
+		//System.out.println(request.getParameter("productImage"));
 		Date date = new Date(System.currentTimeMillis());
 		//java.time.LocalDate.now();
 		PurchaseDemand pd = new PurchaseDemand();
@@ -88,6 +88,7 @@ public class PurchaseDemandService implements IPurchaseDemandService{
 		pd.setCategoryName(request.getParameter("categoryName"));
 		pd.setSubCategoryName(request.getParameter("subCategoryName"));
 		pd.setStatus("Demanded");
+		pd.setProductImage(request.getParameter("productImage"));
 		return purchaseDemandDAO.save(pd);
 	}
 

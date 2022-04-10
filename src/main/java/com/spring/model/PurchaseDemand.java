@@ -26,6 +26,8 @@ public class PurchaseDemand {
 	private String productCode;
 	@Column(name = "productName")
 	private String productName;
+	@Column(name = "productImage")
+	private String productImage;
 	@Column(name = "statedPrice")
 	private Double statedPrice;
 	@Column(name = "discount")
@@ -166,6 +168,12 @@ public class PurchaseDemand {
 	}
 	public void setProductCode(String productCode) {
 		this.productCode = productCode;
+	}
+	public String getProductImage() {
+		return productImage;
+	}
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
 	}
 	
 }

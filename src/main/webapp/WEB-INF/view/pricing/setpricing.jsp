@@ -22,10 +22,10 @@
 						</div>
 					</div>
 					<div class="form-group col-md-3 border">
-						<div class="form-group">
+						<%-- <div class="form-group">
 							<label for="productcode">Cost per unit</label> <input
 								class="form-control" id="unitCost" name="unitCost" value="${pDetail.unitCost}">
-						</div>
+						</div> --%>
 						<div class="form-group">
 							<label for="productname">Tax rate</label> <input
 								class="form-control" id="taxRate" name="taxRate" value="${pDetail.taxRate}">
@@ -40,10 +40,10 @@
 							<label for="productname">Margin Rate</label> <input
 								class="form-control" id="profitMargin" name="profitMargin" value="${pDetail.profitMargin}">
 						</div>
-						<div class="form-group">
+						<%-- <div class="form-group">
 							<label for="productname">Charged Price Per Unit</label> <input
 								class="form-control" id="sellingPrice" name="sellingPrice" value="${pDetail.sellingPrice}" readonly>
-						</div>
+						</div> --%>
 					</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Set Pricing</button>
@@ -52,7 +52,7 @@
 </div>
 <jsp:include page="/WEB-INF/view/common/footer.jsp" />
 <script type="text/javascript">
-var a = $('#unitCost').val();
+/* var a = $('#unitCost').val();
 $( "input" ).change(function() {
 	var unitCostf = parseFloat($('#unitCost').val());
 	var discountf = (parseFloat($('#taxRate').val())) * unitCostf;
@@ -65,6 +65,6 @@ $( "input" ).change(function() {
 	console.log(withProfit + " with profit");
 	var chargedPrice = unitCostf - discountf - taxratef;
 	$('#sellingPrice').val(withProfit);
-	});
+	}); */
 
 </script>

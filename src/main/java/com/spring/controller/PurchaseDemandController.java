@@ -139,6 +139,5 @@ public class PurchaseDemandController implements IPurchaseDemandController{
 		return new ModelAndView("redirect:/purchasedemand/demandlist", "pd", purchasedemands);
 	}
 	
-	
 
 }

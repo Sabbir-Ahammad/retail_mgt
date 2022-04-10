@@ -75,7 +75,7 @@ public class PricingController implements IPricingController{
 	public ModelAndView update(HttpServletRequest request, @ModelAttribute Product product) {
 		Product p = pricingService.update(product);
 		List<Product> productsDetails = pricingService.getAll();
-		return new ModelAndView("pricing/view", "productsDetails", productsDetails);
+		return new ModelAndView("redirect:/pricing/view", "productsDetails", productsDetails);
 	}
 
 	@Override

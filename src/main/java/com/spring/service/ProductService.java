@@ -95,6 +95,10 @@ public class ProductService{
     public Product getProductById(int pid) {
         return productDAO.getProductById(pid);
     }
+    
+    public Product getProductDetailsByCode(String code) {
+        return productDAO.getProductDetailsByCode(code);
+    }
 
     public Product update(Product p) {
         return productDAO.update(p);

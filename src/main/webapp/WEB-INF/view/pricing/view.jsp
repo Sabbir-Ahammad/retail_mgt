@@ -10,10 +10,11 @@
                 <th>Category</th>
                 <th>Sub-Category</th>
                 <th>Supplier</th>
-                <th>Unit Cost</th>
+                <!-- <th>Unit Cost</th> -->
                 <th>Tax Rate</th>
                 <th>Discount</th>
-                <th>Selling Price</th>
+                <th>Profit Margin</th>
+                <!-- <th>Selling Price</th> -->
                 <th>Action</th>
             </tr>
         </thead>
@@ -24,10 +25,11 @@
                     <td>${p.categoryName}</td>
                     <td>${p.subCategoryName}</td>
                     <td>${p.supplierName}</td>
-                    <td>${p.unitCost}</td>
+                    <%-- <td>${p.unitCost}</td> --%>
                     <td>${p.taxRate}</td>
                     <td>${p.discount}</td>
-                    <td>${p.sellingPrice}</td>
+                    <td>${p.profitMargin}</td>
+                    <%-- <td>${p.sellingPrice}</td> --%>
                     <td>
                         <a class="btn btn-primary" role="button" href="/pricing/setpricing/${p.id}">Edit</a>
                     </td>

@@ -25,6 +25,7 @@
 						</div>
 						<div class="form-group">
 						<input class="form-control" id="productCode" name="productCode" value="" type="hidden">
+						<input class="form-control" id="productImage" name="productImage" value="" type="hidden">
 							<label for="productcode">Product</label> <input
 								class="form-control" id="productName" name="productName" value="">
 						</div>
@@ -131,7 +132,8 @@
 						<div class="form-group col-md-2 res">
 						<span role="button" tabindex="0" class="a">
 						<a id="${p.productName}" title="${p.productCode}">
-							<div class="card mb-3" pes>
+							<div class="card mb-3">
+								
 							  <img src="/resources/image/${p.productImage}" class="card-img-top" alt="...">
 							  <div class="card-text">
 							    <p class="card-title">${p.productName}</p>
@@ -176,7 +178,14 @@
 				    $("#productName").val(i);
 				    // or alert($(this).hash();
 				  });
-				});
+			});
+			$(function(){
+				$('div.res img').click(function(){
+					 var i = ($(this).attr('src'));
+					 $("#productImage").val(i);
+					    // or alert($(this).hash();
+					 });
+			});
 		
 		/* $('#dtDynamicVerticalScrollExample').DataTable({
 		    "scrollY": "50vh",

@@ -54,8 +54,8 @@ public class ProductDAO implements ProductRepository{
     }
 
     public Product updatePricing(Product p) {
-    	String hql = "update product set unit_cost = '"+p.getUnitCost()+"',tax_rate = '"+p.getTaxRate()
-    	+"', discount = '"+p.getDiscount()+"', discount = '"+p.getDiscount()+"', profit_margin = '"+p.getProfitMargin()+"',selling_price = '"+p.getSellingPrice()+"' where id = '"+p.getId()+"'";
+    	String hql = "update product set tax_rate = '"+p.getTaxRate()+"',discount = '"+p.getDiscount()+"', profit_margin = '"+p.getProfitMargin()
+    	+"' where id = '"+p.getId()+"'";
         Query q = getSession().createQuery(hql);
         q.executeUpdate();
         getSession().flush();
@@ -99,7 +99,12 @@ public class ProductDAO implements ProductRepository{
         List<Product> productList = getSession().createQuery(sql).list();
         return productList.get(0);
 	}
-
+	
+	public Product getProductDetailsByCode(String productCode) {
+		String sql = "from product where productCode = '" + productCode + "'";
+        List<Product> productList = getSession().createQuery(sql).list();
+        return productList.get(0);
+	}
 
 	@Override
 	public List<Product> getProductsByCategory(String categoryName) {

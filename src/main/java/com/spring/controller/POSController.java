@@ -5,12 +5,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.controller.impl.IPOSController;
 import com.spring.model.Product;
+import com.spring.model.Inventory;
+import com.spring.service.InventoryService;
 import com.spring.service.POSService;
 
 @RestController
@@ -55,6 +58,11 @@ public class POSController implements IPOSController{
 	public ModelAndView getAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@RequestMapping(value = "/productDetail/{code}")
+	public Inventory getProductDetail(@PathVariable String code) {
+		return posService.getProductDetail(code);
 	}
 
 }

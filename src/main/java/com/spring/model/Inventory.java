@@ -54,6 +54,8 @@ public class Inventory {
 	private String lotNumber;
 	@Column(name = "receivedDate")
 	private Date receivedDate;
+	@Column(name = "productImage")
+	private String productImage;
 	
 	public int getId() {
 		return id;
@@ -174,6 +176,12 @@ public class Inventory {
 	}
 	public void setLotNumber(String lotNumber) {
 		this.lotNumber = lotNumber;
+	}
+	public String getProductImage() {
+		return productImage;
+	}
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
 	}
 	
 }
