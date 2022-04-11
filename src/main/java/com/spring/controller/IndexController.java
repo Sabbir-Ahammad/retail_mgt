@@ -10,6 +10,11 @@ public class IndexController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET) 
 	public ModelAndView index() {
-		return new ModelAndView("index");
+		return new ModelAndView("login");
+	}
+	
+	@RequestMapping(value = "userLogin", method = RequestMethod.GET) 
+	public ModelAndView userLogin() {
+		return new ModelAndView("redirect:/admin/dashboard");
 	}
 }

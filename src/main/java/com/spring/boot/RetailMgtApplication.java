@@ -33,6 +33,8 @@ public class RetailMgtApplication extends SpringBootServletInitializer{
 			}
 		});
 		app.run(args);
+		
+		
 	}
 
 }
