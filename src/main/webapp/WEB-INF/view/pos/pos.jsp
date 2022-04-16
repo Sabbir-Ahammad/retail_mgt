@@ -113,8 +113,6 @@
 	var addSales = [];
 	function salesCart(){
 		var a = [];
-		/* var a = document.getElementById("sellProductTable").rows.item(1).innerHTML;
-		console.log(a); */
 		var tb = $('#sellProductTable:eq(0) tbody');
 		  var size = tb.find("tr").length;
 		  //console.log("Number of rows : " + size);
@@ -124,21 +122,21 @@
 		    $(element).find('td').each(function(index, element) {
 		      var colVal = $(element).text();
 		      a[index] = colVal.trim();
+		      if(a[2] != undefined){
+		    	  a[2] = $('#quantityChange').val();
+		      }
 		      console.log(a[index]);
 		      //console.log("    Value in col " + (index + 1) + " : " + colVal.trim());
 		    });
 		    addSales.push(a);
-		    addSales[index][2]=$('#quantityChange').val();
-		    //console.log($('#quantityChange').val());
+		    //addSales[index][2]=$('#quantityChange').val();
+		    /* console.log($('#quantityChange').val()); */
 		  });
-		  /* for(i=0;i<addSales.length;i++){
-			  console.log(addSales[i]);
-		  }
-		   */
 		  $('#salesCart > tbody:last-child').append("<tr><td>"+a[0]+"</td><td>" 
   				+ a[1] + "</td><td class='storedInventory'>" + 
   				$('#quantityChange').val() + "</td><td>" + a[3]*$('#quantityChange').val() 
-  				+ "</td><td><input type='text' name='product_name[]' value='"+ a[0]+"'/><input type='text' name='product_quantity[]' value='"+ $('#quantityChange').val()+"'/></td></tr>");
+  				+ "</td><td><input type='hidden' name='product_name[]' value='"+ a[0]
+  				+"'/><input type='hidden' name='product_quantity[]' value='"+ $('#quantityChange').val()+"'/></td></tr>");
 		  $("#sellProductTable > tbody").html("");
 	}
 	
@@ -153,13 +151,13 @@
 	    	 for(i=0;i<addSales.length;i++){
 	    		 if(addSales[i][0] == data.productCode){
 	    			 quantity = addSales[i][2];
-	    				    if(quantity != undefined){
-	    				    	var quant = parseInt(quantity);
-	    				    	totalAdded = totalAdded + quant;
-	    				    	remainingStoreAmount = data.storedAmount - totalAdded;
-	    				    }
+	    			 if(quantity != undefined){
+	    			   	var quant = parseInt(quantity);
+	    			   	totalAdded = totalAdded + quant;
+	    			   	remainingStoreAmount = data.storedAmount - totalAdded;
+	    			 }
 	    			 //remainingStoreAmount = data.storedAmount - addSales[i][2];
-	    			 $('#sellProductTable > tbody:last-child').append("<tr><td>"+data.productCode+"</td><td>" 
+	    			 $('#sellProductTable > tbody:last-child').append("<tr id="${data.productCode}"><td>"+data.productCode+"</td><td>" 
 	 	    				+ data.productName + "</td><td class='storedInventory'>" + 
 	 	    				remainingStoreAmount + "</td><td>" + data.sellingPrice + "</td></td></tr>");
 	    			 return;
