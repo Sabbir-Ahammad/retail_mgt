@@ -52,6 +52,12 @@
 								class="form-control" id="sellingPrice" name="sellingPrice">
 						</div>
 					</div>
+					<div class="form-group col-md-3 border">
+						<div class="form-group">
+							<label for="productname">Selling Price</label> <input
+								class="form-control" id="sellingPrice" name="sellingPrice">
+						</div>
+					</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Set Pricing</button>
 		</form>

@@ -23,7 +23,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
 			.passwordEncoder(passwordEncoder())
-			.withUser("user").password(passwordEncoder().encode("user")).roles("USER").and()
+				/*
+				 * .withUser("user").password(passwordEncoder().encode("user")).roles("USER").
+				 * and()
+				 */
 			.withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
 	}
 	
@@ -34,7 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
             .anyRequest().hasRole("ADMIN")
 		.and()
-		.formLogin().loginPage("/login").permitAll();
+		.csrf() .disable()
+		.httpBasic();
+		/*.formLogin().loginPage("/").permitAll();*/
         /*.httpBasic();*/
 	}
 	

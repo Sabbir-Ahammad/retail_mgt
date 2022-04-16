@@ -54,8 +54,13 @@ public class ProductDAO implements ProductRepository{
     }
 
     public Product updatePricing(Product p) {
-    	String hql = "update product set tax_rate = '"+p.getTaxRate()+"',discount = '"+p.getDiscount()+"', profit_margin = '"+p.getProfitMargin()
-    	+"' where id = '"+p.getId()+"'";
+		/*
+		 * String hql =
+		 * "update product set tax_rate = '"+p.getTaxRate()+"',discount = '"+p.
+		 * getDiscount()+"', profit_margin = '"+p.getProfitMargin()
+		 * +"',selling_price = '"+p.getSellingPrice()+"' where id = '"+p.getId()+"'";
+		 */
+    	String hql = "update product set selling_price = '"+p.getSellingPrice()+"' where id = '"+p.getId()+"'";
         Query q = getSession().createQuery(hql);
         q.executeUpdate();
         getSession().flush();

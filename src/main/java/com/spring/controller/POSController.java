@@ -35,10 +35,12 @@ public class POSController implements IPOSController{
 	@Override
 	@RequestMapping(value = "/posSave")
 	public ModelAndView save(HttpServletRequest request) {
-		//System.out.println(request.getParameter("product_name[]"));
+		System.out.println(request.getParameter("product_name[]"));
+		System.out.println(request.getParameter("product_quantity[]"));
 		Map<String, String[]> map = request.getParameterMap();
 		for (int i = 0; i < map.get("product_name[]").length; i++) {
 			System.out.println(map.get("product_name[]")[i]);
+			System.out.println(map.get("product_quantity[]")[i]);
 		}
 		return null;
 	}

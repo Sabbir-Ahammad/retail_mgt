@@ -11,6 +11,7 @@
 			action="/pricing/update" enctype="multipart/form-data">
 			<div class="row">
 			<input type="hidden" id="id" name="id" value="${pDetail.id}">
+			<input type="hidden" id="id" name="productCode" value="${pDetail.productCode}">
 					<div class="form-group col-md-3">
 						<div class="form-group">
 							<label for="suppliercode">Supplier</label>
@@ -21,11 +22,11 @@
 							<input class="form-control" id="product" name="product" value="${pDetail.productName}" readonly>
 						</div>
 					</div>
-					<div class="form-group col-md-3 border">
-						<%-- <div class="form-group">
+					<%-- <div class="form-group col-md-3 border">
+						<div class="form-group">
 							<label for="productcode">Cost per unit</label> <input
 								class="form-control" id="unitCost" name="unitCost" value="${pDetail.unitCost}">
-						</div> --%>
+						</div>
 						<div class="form-group">
 							<label for="productname">Tax rate</label> <input
 								class="form-control" id="taxRate" name="taxRate" value="${pDetail.taxRate}">
@@ -34,16 +35,16 @@
 							<label for="productname">Discount</label> <input
 								class="form-control" id="discount" name="discount" value="${pDetail.discount}">
 						</div>
-					</div>
+					</div> --%>
 					<div class="form-group col-md-3 border">
-					<div class="form-group">
+					<%-- <div class="form-group">
 							<label for="productname">Margin Rate</label> <input
 								class="form-control" id="profitMargin" name="profitMargin" value="${pDetail.profitMargin}">
-						</div>
-						<%-- <div class="form-group">
-							<label for="productname">Charged Price Per Unit</label> <input
-								class="form-control" id="sellingPrice" name="sellingPrice" value="${pDetail.sellingPrice}" readonly>
 						</div> --%>
+						<div class="form-group">
+							<label for="productname">Charged Price Per Unit</label> <input
+								class="form-control" id="sellingPrice" name="sellingPrice" value="${pDetail.sellingPrice}">
+						</div>
 					</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Set Pricing</button>

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.spring.dao.impl.InventoryRepository;
 import com.spring.model.Category;
 import com.spring.model.Inventory;
+import com.spring.model.Product;
 @Repository(value = "inventoryDAO")
 @Transactional
 public class InventoryDAO implements InventoryRepository{
@@ -64,6 +65,15 @@ public class InventoryDAO implements InventoryRepository{
 		String sql = "from inventory where productCode = '" + code + "'";
         List<Inventory> cList = getSession().createQuery(sql).list();
         return cList.get(0);
+	}
+
+	@Override
+	public Inventory updateSellingprice(Product p) {
+		String hql = "update inventory set selling_price = '"+p.getSellingPrice()+"' where product_code = '"+p.getProductCode()+"'";
+        Query q = getSession().createQuery(hql);
+        q.executeUpdate();
+        getSession().flush();
+		return null;
 	}
 
 }

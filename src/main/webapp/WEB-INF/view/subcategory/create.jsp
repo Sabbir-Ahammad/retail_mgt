@@ -29,7 +29,7 @@
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label class="form-control-label px-3">Sub-Category Name<span class="text-danger"> *</span></label> 
-	          <input type="text" id="catname" name="subname" placeholder="Enter Sub-category name" class="form-control"> 
+	          <input type="text" id="subname" name="subname" placeholder="Enter Sub-category name" class="form-control"> 
 		    </div>
 		  </div>
 		  <!-- <div class="form-group">

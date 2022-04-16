@@ -37,6 +37,8 @@ public class ProductService{
 	SupplierService supplierService;
 	@Autowired
 	SubCategoryService subCategoryService;
+	@Autowired
+	InventoryService inventoryService;
 	
 	public List<Category> getAllCategory() {
 		return categoryService.getAll();
@@ -105,6 +107,7 @@ public class ProductService{
     }
     
     public Product updatepricing(Product p) {
+    	inventoryService.updateSellingPrice(p);
     	return productDAO.updatePricing(p);
     }
 
