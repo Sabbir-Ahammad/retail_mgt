@@ -6,25 +6,25 @@
 <table id="purchaseDemandTable" class="table table-striped table-hover" style="width:100%">
          <thead>
             <tr>
-	            <th>ID</th>
+	           
 	            <th>Product Name</th>
-	            <th>Category Name</th>
-	            <th>Sub-Category Name</th>
-	            <th>Received Date</th>
-	            <th>Supplier Name</th>
-	            <th>Stored Quantity</th>
+	            <th>Customer Name</th>
+	            <th>profit</th>
+	            <th>salesDate</th>
+	            <th>sellingPrice</th>
+	            <th>salesQuantity</th>
             </tr>
         </thead>
         <tbody>
-            <c:forEach items="${in}" var="i">
+            <c:forEach items="${pos}" var="p">
                 <tr>
-	                <td>${i.id}</td>
-	                <td>${i.productName}</td>
-	                <td>${i.categoryName}</td>
-	                <td>${i.subcategoryName}</td>
-	                <td>${i.receivedDate}</td>
-	                <td>${i.supplierName}</td>
-	                <td>${i.storedAmount}</td>
+	            
+	                <td>${p.productName}</td>
+	                <td>${p.customerName}</td>
+	                <td>${p.profit}</td>
+	                <td>${p.salesDate}</td>
+	                <td>${p.sellingPrice}</td>
+	                <td>${p.salesQuantity}</td>
                 </tr>
             </c:forEach>
         </tbody>

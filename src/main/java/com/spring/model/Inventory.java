@@ -50,6 +50,8 @@ public class Inventory {
 	private double selling;
 	@Column(name = "sellingTax")
 	private double sellingTax;
+	@Column(name = "profitPerUnit")
+	private double profitPerUnit;
 	@Column(name = "lotNumber")
 	private String lotNumber;
 	@Column(name = "receivedDate")
@@ -182,6 +184,12 @@ public class Inventory {
 	}
 	public void setProductImage(String productImage) {
 		this.productImage = productImage;
+	}
+	public double getProfitPerUnit() {
+		return profitPerUnit;
+	}
+	public void setProfitPerUnit(double profitPerUnit) {
+		this.profitPerUnit = profitPerUnit;
 	}
 	
 }

@@ -8,4 +8,5 @@ import com.spring.model.Product;
 
 public interface IPOSService extends ICommonService<POSSales>{
 	List<Product> getAllProducts();
+	public int getTransactionId();
 }

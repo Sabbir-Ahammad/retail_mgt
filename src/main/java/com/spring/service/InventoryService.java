@@ -68,18 +68,22 @@ public class InventoryService implements IInventoryService{
 		Double idis = null,iap = null,iat = null;
 		Integer isa = null;
 		Double taxRate = product.getTaxRate(), discount=product.getDiscount(), profitMargin=product.getProfitMargin();
-		Double taxedPrice = null, profit=null, sellingPrice=null;
+		Double taxedPrice = null, sellingPrice=null;
 		Double price=null;
+		double profit=0;
 		try {
 			 Inventory i = inventoryDAO.getByProductCode(p.getProductCode());
 			 isa = i.getStoredAmount() + psa;
 			 idis = ((i.getAverageDiscount() * i.getStoredAmount()) + pdis)/ isa;
 			 iap = ((i.getAveragePrice() * i.getStoredAmount()) + ((pap-pdis)+pat))/isa;
 			 iat = ((i.getAverageTax() * i.getStoredAmount()) + pat)/isa;
+			 
 			 i.setAverageDiscount(idis);
 			 i.setAveragePrice(iap);
 			 i.setAverageTax(iat);
 			 i.setStoredAmount(isa);
+			 profit=i.getSellingPrice() - i.getAveragePrice();
+			 i.setProfitPerUnit(profit);
 			 return inventoryDAO.update(i);
 		} catch (Exception e) {
 			idis = (pdis/ psa);
@@ -92,6 +96,7 @@ public class InventoryService implements IInventoryService{
 		in.setAverageTax(iat);
 		in.setStoredAmount(isa);
 		return inventoryDAO.save(in);
+		//return null;
 
 	}
 	
@@ -103,5 +108,17 @@ public class InventoryService implements IInventoryService{
 	public Product updateSellingPrice(Product p) {
 		inventoryDAO.updateSellingprice(p);
 		return null;
+	}
+
+	@Override
+	public Inventory updateSold(String i, int j) {
+		Inventory ii = new Inventory();
+		ii.setProductCode(i);
+		ii.setStoredAmount(Integer.valueOf(j));
+		//System.err.println(ii.getProductCode() + "" + ii.getStoredAmount());
+		
+		//System.err.println("procode"+i);
+		//System.err.println("quantity"+j);
+		return inventoryDAO.updateSold(ii);
 	}
 }

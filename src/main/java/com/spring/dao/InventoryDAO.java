@@ -53,7 +53,7 @@ public class InventoryDAO implements InventoryRepository{
 
 	@Override
 	public Inventory update(Inventory t) {
-		String hql = "update inventory set average_price = '"+t.getAveragePrice()+"',average_discount = '"+t.getAverageDiscount()
+		String hql = "update inventory set profitPerUnit = '"+t.getProfitPerUnit()+"', average_price = '"+t.getAveragePrice()+"',average_discount = '"+t.getAverageDiscount()
     	+"', average_tax = '"+t.getAverageTax()+"', stored_amount = '"+t.getStoredAmount()+"' where product_code = '"+t.getProductCode()+"'";
         Query q = getSession().createQuery(hql);
         q.executeUpdate();
@@ -61,7 +61,7 @@ public class InventoryDAO implements InventoryRepository{
 		return t;
 	}
 	
-	public Inventory getByProductCode(String code) {
+	public Inventory getByProductCode(String code) {        
 		String sql = "from inventory where productCode = '" + code + "'";
         List<Inventory> cList = getSession().createQuery(sql).list();
         return cList.get(0);
@@ -70,6 +70,15 @@ public class InventoryDAO implements InventoryRepository{
 	@Override
 	public Inventory updateSellingprice(Product p) {
 		String hql = "update inventory set selling_price = '"+p.getSellingPrice()+"' where product_code = '"+p.getProductCode()+"'";
+        Query q = getSession().createQuery(hql);
+        q.executeUpdate();
+        getSession().flush();
+		return null;
+	}
+
+	@Override
+	public Inventory updateSold(Inventory i) {
+		String hql = "update inventory set stored_amount = '"+i.getStoredAmount()+"' where product_code = '"+i.getProductCode()+"'";
         Query q = getSession().createQuery(hql);
         q.executeUpdate();
         getSession().flush();

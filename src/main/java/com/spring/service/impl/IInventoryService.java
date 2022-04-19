@@ -6,4 +6,5 @@ import com.spring.model.Product;
 
 public interface IInventoryService extends ICommonService<Inventory>{
 	public Product updateSellingPrice(Product p);
+	public Inventory updateSold(String i, int j);
 }

@@ -1,5 +1,7 @@
 package com.spring.model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,22 +18,14 @@ public class POSSales {
     @GeneratedValue
     @Column(name = "id")
     private int id;
+	@Column(name = "transactionCode")
+    private int transactionCode;
     @Column(name = "productCode")
     private String productCode;
     @Column(name = "productName")
     private String productName;
-    @Column(name = "categoryCode")
-    private String categoryCode;
-    @Column(name = "categoryName")
-    private String categoryName;
-    @Column(name = "subCategoryCode")
-    private String subCategoryCode;
-    @Column(name = "subCategoryName")
-    private String subCategoryName;
-    @Column(name = "supplierCode")
-    private String supplierCode;
-    @Column(name = "supplierName")
-    private String supplierName;
+    @Column(name = "salesAmount")
+    private int salesAmount;
     @Column(name = "productImage")
     private String productImage;
     @Column(name = "price")
@@ -40,12 +34,26 @@ public class POSSales {
     private Double salesTaxRate;
     @Column(name = "salesDiscount")
     private Double salesDiscount;
-    @Column(name = "profitMargin")
+    @Column(name = "salesQuantity")
+    private int salesQuantity;
+    public int getSalesQuantity() {
+		return salesQuantity;
+	}
+	public void setSalesQuantity(int salesQuantity) {
+		this.salesQuantity = salesQuantity;
+	}
+	@Column(name = "profitMargin")
     private Double profitMargin;
+    @Column(name = "profit")
+    private Double profit;
     @Column(name = "sellingPrice")
     private Double sellingPrice;
+    @Column(name = "customerCode")
+    private String customerCode;
     @Column(name = "customerName")
     private String customerName;
+    @Column(name = "salesDate")
+	private Date salesDate;
 	public int getId() {
 		return id;
 	}
@@ -63,42 +71,6 @@ public class POSSales {
 	}
 	public void setProductName(String productName) {
 		this.productName = productName;
-	}
-	public String getCategoryCode() {
-		return categoryCode;
-	}
-	public void setCategoryCode(String categoryCode) {
-		this.categoryCode = categoryCode;
-	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-	public String getSubCategoryCode() {
-		return subCategoryCode;
-	}
-	public void setSubCategoryCode(String subCategoryCode) {
-		this.subCategoryCode = subCategoryCode;
-	}
-	public String getSubCategoryName() {
-		return subCategoryName;
-	}
-	public void setSubCategoryName(String subCategoryName) {
-		this.subCategoryName = subCategoryName;
-	}
-	public String getSupplierCode() {
-		return supplierCode;
-	}
-	public void setSupplierCode(String supplierCode) {
-		this.supplierCode = supplierCode;
-	}
-	public String getSupplierName() {
-		return supplierName;
-	}
-	public void setSupplierName(String supplierName) {
-		this.supplierName = supplierName;
 	}
 	public String getProductImage() {
 		return productImage;
@@ -141,6 +113,36 @@ public class POSSales {
 	}
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
+	}
+	public int getSalesAmount() {
+		return salesAmount;
+	}
+	public void setSalesAmount(int salesAmount) {
+		this.salesAmount = salesAmount;
+	}
+	public Double getProfit() {
+		return profit;
+	}
+	public void setProfit(Double profit) {
+		this.profit = profit;
+	}
+	public String getCustomerCode() {
+		return customerCode;
+	}
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
+	}
+	public Date getSalesDate() {
+		return salesDate;
+	}
+	public void setSalesDate(Date salesDate) {
+		this.salesDate = salesDate;
+	}
+	public int getTransactionCode() {
+		return transactionCode;
+	}
+	public void setTransactionCode(int transactionCode) {
+		this.transactionCode = transactionCode;
 	}
     
 }
